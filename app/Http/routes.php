@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 
+//刘红英 19~119行
 
 
 
@@ -115,6 +116,7 @@ Route::get('/', function () {
 
 
 
+//孙林晋 119~219
 
 
 
@@ -214,6 +216,7 @@ Route::get('/', function () {
 
 
 
+//陈杰 219~319
 
 
 
@@ -313,6 +316,7 @@ Route::get('/', function () {
 
 
 
+//李韶凡319~419
 
 
 
@@ -412,10 +416,6 @@ Route::get('/', function () {
 
 
 
-
-
-
-
-//高家亮
+//高家亮 419开始
 
 Route::resource('/admin/index','Admin\IndexController');
