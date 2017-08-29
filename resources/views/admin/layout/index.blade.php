@@ -33,8 +33,11 @@
 <!-- Theme Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
-
-<title>MWS Admin - Dashboard</title>
+<!--admin用户修改密码时用到的特效工具-->
+<script type="text/javascript" src="/d/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="/d/jquery/jquery-1.10.2.min.js"></script>
+ <script type="text/javascript" src="/d/bootstrap/js/bootstrap.min.js"></script>
+<title>{{ Config::get('app.title') }}</title>
 
 </head>
 
@@ -141,7 +144,7 @@
                         <ul class="mws-messages">
                         	<li class="read">
                             	<a href="/d/#">
-                                    <span class="sender">John Doe</span>
+                                    <span class="sender">admin</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
                                     </span>
@@ -201,13 +204,11 @@
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
-                    <div id="mws-username">
-                        Hello, John Doe
-                    </div>
+                    <div id="mws-username">admin</div>
                     <ul>
-                    	<li><a href="/d/#">Profile</a></li>
-                        <li><a href="/d/#">Change Password</a></li>
-                        <li><a href="/d/index.html">Logout</a></li>
+                    	<li><a href="/d/#">简况</a></li>
+                        <li><a href="{{ url('admin/pass') }}">修改密码</a></li>
+                        <li><a href="{{ url('admin/login/logout') }}">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -257,9 +258,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/d/#"><i class="icon-chart-alt"></i> 分类详情</a>
+                        <a href=""><i class="icon-chart-alt"></i> 分类详情</a>
                         <ul>
-                            <li><a href="">暂时做死</a></li>
+                            <li><a href="{{ url('admin/type/create') }}">分类添加</a></li>
+                            <li><a href="{{ url('admin/type/index') }}">分类列表</a></li>
                         </ul>
                     </li>
                     <li>
@@ -277,7 +279,8 @@
                     <li>
                         <a href="/d/#"><i class="icon-warning-sign"></i> 网站管理</a>
                         <ul>
-                            <li><a href="">轮播图管理</a></li>
+                            <li><a href="{{ url('admin/slide') }}">轮播图列表</a></li>
+                            <li><a href="{{ url('admin/slide/create') }}">轮播图添加</a></li>
                             <li><a href="">广告管理</a></li>
                             <li><a href="">网站配置</a></li>
                             <li><a href="">友情链接</a></li>
@@ -329,7 +332,7 @@
     <script src="/d/js/libs/jquery.mousewheel.min.js"></script>
     <script src="/d/js/libs/jquery.placeholder.min.js"></script>
     <script src="/d/custom-plugins/fileinput.js"></script>
-    
+    <script type="text/javascript" src="{{asset('d/layer/layer.js')}}"></script>
     <!-- jQuery-UI Dependent Scripts -->
     <script src="/d/jui/js/jquery-ui-1.9.2.min.js"></script>
     <script src="/d/jui/jquery-ui.custom.min.js"></script>
