@@ -253,7 +253,8 @@
                     <li>
                         <a href="/d/#"><i class="icon-t-shirt"></i> 商品详情</a>
                         <ul>
-                            <li><a href="">暂时写死</a></li>
+                            <li><a href="/admin/goods">查看商品列表</a></li>
+                            <!-- <li><a href="/admin/link">暂时写死</a></li> -->
                         </ul>
                     </li>
                     <li>

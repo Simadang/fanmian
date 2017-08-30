@@ -6,7 +6,7 @@
 
     <div class="mws-panel grid_8 mws-collapsible">
         <div class="mws-panel-header">
-            <span><i class="icon-table"></i> 链接列表</span>
+            <span><i class="icon-table"></i> 商品列表</span>
             <div class="mws-collapse-button mws-inset"><span></span>
             </div>
         </div>
@@ -42,20 +42,35 @@
         <thead>
             <tr role="row">
                 <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending"  style="width: 115px;">ID</th>
-                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 157px;">logo</th>
-                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 142px;">链接名称</th>
-                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">链接地址</th>
-                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">状态</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 157px;">卖家名</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 142px;">所属板块</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">商品名</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">商品简介</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">售价</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">数量</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">成色</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">创建时间</th>
                 <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 102px;">操作</th></tr>
             </thead>
             <tbody role="alert" aria-live="polite" aria-relevant="all">
                 @foreach($data as $k=>$v)
+
+
+               
+
                 <tr class="even" style='text-align: center;'>
                     <td class="  sorting_1">{{$v['id']}}</td>
-                    <td class=" ">{{$v['logo']}}</td>
+
+                    <td class=" ">{{ $v['uid'] }}</td>
+
+                    <td class=" ">{{$v['tid']}}</td>
+
                     <td class=" ">{{$v['title']}}</td>
-                    <td class=" ">{{$v['url']}}</td>
-                    <td class=" ">{{$v['status']==1?'不显示':'显示'}}</td>
+                    <td class=" ">{{$v['intro']}}</td>
+                    <td class=" ">{{$v['reprice']}}</td>
+                    <td class=" ">{{$v['num']}}</td>
+                    <td class=" ">{{$v['condition']}}</td>
+                    <td class=" ">{{$v['ctime']}}</td>
                     <td class=" ">
                         <span class="btn-group">
                            <!--  <span class="btn-group">
@@ -72,8 +87,9 @@
                             </span> -->
 
                             <span class="btn-group">
+                                 <a href="" class="btn btn-small"><i class="icon-screenshot"></i></a>
                                  <a href="/admin/link/{{$v->id}}/edit" class="btn btn-small"><i class="icon-pencil"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-small" onclick="delLink({{ $v['id'] }})"><i class="icon-trash"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-small" onclick="delgoods({{ $v['id'] }})"><i class="icon-trash"></i></a>
                                 
                             </span>
 
@@ -83,6 +99,7 @@
                 
                     </td>
                 </tr>
+                
                 @endforeach
             </tbody>
         </table>
@@ -97,13 +114,13 @@
 
 <script>
     // 通过弹窗进行友情链接的删除
-      function delLink(linkid){
+      function delgoods(goodsid){
 
             layer.confirm('是否确认删除？', {
                 btn: ['确认','取消']        //按钮
             }, function(){
                
-                $.post('{{url('admin/link/')}}/'+linkid,{'_token':'{{csrf_token()}}','_method':'delete'},function(data){
+                $.post('{{url('admin/goods/')}}/'+goodsid,{'_token':'{{csrf_token()}}','_method':'delete'},function(data){
                     console.log(data);
                    // 删除成功
                     if(data.status == 0){
