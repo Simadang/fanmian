@@ -15,7 +15,7 @@
     <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
         <div id="DataTables_Table_0_length" class="dataTables_length">
 
-            <form method='get' action='/admin/link'>
+            <form method='get' action='/admin/goods'>
                 <label>
                     显示
                     <select name="count" aria-controls="DataTables_Table_0">
@@ -49,7 +49,7 @@
                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">售价</th>
                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">数量</th>
                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">成色</th>
-                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">创建时间</th>
+                <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 99px;">上架时间</th>
                 <th class="sorting_disabled" role="columnheader" rowspan="1" colspan="1" aria-label="" style="width: 102px;">操作</th></tr>
             </thead>
             <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -87,9 +87,9 @@
                             </span> -->
 
                             <span class="btn-group">
-                                 <a href="" class="btn btn-small"><i class="icon-screenshot"></i></a>
-                                 <a href="/admin/link/{{$v->id}}/edit" class="btn btn-small"><i class="icon-pencil"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-small" onclick="delgoods({{ $v['id'] }})"><i class="icon-trash"></i></a>
+                                 <a href="" class="btn btn-small"><i class="icon-screenshot"   title="跳转到前台商品页"></i></a>
+                                 <a href="/admin/link/{{$v->id}}/edit" class="btn btn-small"   title="下架"><i class="icon-hand-down"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-small" onclick="delgoods({{ $v['id'] }})" title="删除"><i class="icon-trash"></i></a>
                                 
                             </span>
 

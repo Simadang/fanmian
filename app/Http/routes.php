@@ -319,6 +319,7 @@ Route::get('/', function () {
 //李韶凡319~419
 Route::resource('/admin/link','Admin\LinkController');
 Route::resource('/admin/goods','Admin\GoodsController');
+Route::resource('/admin/order','Admin\OrderController');
 
 
 

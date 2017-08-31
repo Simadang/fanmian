@@ -201,13 +201,11 @@
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
-                    <div id="mws-username">
-                        Hello, John Doe
-                    </div>
+                    <div id="mws-username">admin</div>
                     <ul>
-                    	<li><a href="/d/#">Profile</a></li>
-                        <li><a href="/d/#">Change Password</a></li>
-                        <li><a href="/d/index.html">Logout</a></li>
+                        <li><a href="/d/#">简况</a></li>
+                        <li><a href="{{ url('admin/pass') }}">修改密码</a></li>
+                        <li><a href="{{ url('admin/login/logout') }}">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -231,13 +229,7 @@
                 <span></span>
             </div>
             
-        	<!-- Searchbox -->
-        	<div id="mws-searchbox" class="mws-inset">
-            	<form action="typography.html">
-                	<input type="text" class="mws-search-input" placeholder="Search...">
-                    <button type="submit" class="mws-search-submit"><i class="icon-search"></i></button>
-                </form>
-            </div>
+
             
             <!-- Main Navigation -->
             <div id="mws-navigation">
@@ -251,51 +243,54 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/d/#"><i class="icon-t-shirt"></i> 商品详情</a>
-                        <ul>
+                        <a href="/admin/goods"><i class="icon-tags"></i> 商品详情</a>
+                       <!--  <ul>
                             <li><a href="/admin/goods">查看商品列表</a></li>
-                            <!-- <li><a href="/admin/link">暂时写死</a></li> -->
-                        </ul>
+                            <li><a href="/admin/link">暂时写死</a></li>
+                        </ul>  -->
                     </li>
                     <li>
                         <a href="/d/#"><i class="icon-chart-alt"></i> 分类详情</a>
                         <ul>
-                            <li><a href="">暂时做死</a></li>
+                            <li><a href="{{ url('admin/type/create') }}">分类添加</a></li>
+                            <li><a href="{{ url('admin/type/index') }}">分类列表</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/d/#"><i class="icon-th-list"></i> 订单详情</a>
-                        <ul>
+                        <a href="/admin/order"><i class="icon-list-2"></i> 订单详情</a>
+                       <!--  <ul>
                             <li><a href="">暂时写死</a></li>
-                        </ul>
+                        </ul> -->
                     </li>
                     <li>
-                        <a href="/d/#"><i class="icon-database"></i> 鱼塘管理</a>
-                        <ul>
-                            <li><a href="">暂时写死</a></li>
-                        </ul>
+                        <a href="{{ url('admin/question/index') }}"><i class="icon-network"></i> 鱼塘管理</a>
+                        <!-- <ul>
+                            <li><a href="{{ url('admin/question/index') }}">鱼塘列表</a></li>
+                        </ul> -->
                     </li>
                     <li>
-                        <a href="/d/#"><i class="icon-warning-sign"></i> 网站管理</a>
+                        <a href="/d/#"><i class="icon-cog-3"></i> 网站管理</a>
                         <ul>
-                            <li><a href="">轮播图管理</a></li>
                             <li><a href="">广告管理</a></li>
                             <li><a href="">网站配置</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="/d/#"><i class="icon-warning-sign"></i> 友情链接管理</a>
+                        <a href="/d/#"><i class="icon-television"></i>轮播图管理</a>
+                        <ul>
+                            <li><a href="{{ url('admin/slide') }}">轮播图列表</a></li>
+                            <li><a href="{{ url('admin/slide/create') }}">轮播图添加</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/d/#"><i class="icon-link"></i> 友情链接管理</a>
                         <ul>
                             <li><a href="/admin/link">查看友情链接</a></li>
                             <li><a href="/admin/link/create">添加友情链接</a></li>
                         </ul>
                     </li>
                     
-                        <a href="/d/icons.html">
-                            <i class="icon-pacman"></i> 
-                            Icons <span class="mws-nav-tooltip">2000+</span>
-                        </a>
-                    </li>
+                       
                 </ul>
             </div>         
         </div>
@@ -337,7 +332,14 @@
     <script src="/d/js/libs/jquery.placeholder.min.js"></script>
     <script src="/d/custom-plugins/fileinput.js"></script>
     <script type="text/javascript" src="{{asset('d/layer/layer.js')}}"></script>
-    
+    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.all.min.js"> </script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
+
+
+
     <!-- jQuery-UI Dependent Scripts -->
     <script src="/d/jui/js/jquery-ui-1.9.2.min.js"></script>
     <script src="/d/jui/jquery-ui.custom.min.js"></script>
