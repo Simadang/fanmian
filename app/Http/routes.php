@@ -139,8 +139,10 @@ Route::group(['middleware'=>'Login'],function(){
 Route::resource('home/index','Home\IndexController');
 //轮播图在前台显示的路由
 Route::get('/lun','Home\IndexController@lun');
-
-
+//鱼塘
+Route::controller('/admin/question','Admin\QuestionController');
+Route::get('/admin/question/answer/{id}','Admin\QuestionController@answer');
+Route::get('/admin/question/delete/{id}','Admin\QuestionController@delete');
 
 
 
