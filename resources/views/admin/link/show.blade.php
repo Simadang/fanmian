@@ -72,8 +72,8 @@
                             </span> -->
 
                             <span class="btn-group">
-                                 <a href="/admin/link/{{$v->id}}/edit" class="btn btn-small"><i class="icon-pencil"></i></a>
-                                <a href="javascript:void(0)" class="btn btn-small" onclick="delLink({{ $v['id'] }})"><i class="icon-trash"></i></a>
+                                 <a href="/admin/link/{{$v->id}}/edit" class="btn btn-small"   title="编辑"><i class="icon-pencil"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-small" onclick="delLink({{ $v['id'] }})" title="删除"><i class="icon-trash"></i></a>
                                 
                             </span>
 
@@ -104,7 +104,7 @@
             }, function(){
                
                 $.post('{{url('admin/link/')}}/'+linkid,{'_token':'{{csrf_token()}}','_method':'delete'},function(data){
-                    // console.log(data);
+                    console.log(data);
                    // 删除成功
                     if(data.status == 0){
                         layer.msg(data.msg, {icon: 5});

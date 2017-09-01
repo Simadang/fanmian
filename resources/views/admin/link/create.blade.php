@@ -23,13 +23,13 @@
         <div class="mws-form-row">
           <label class="mws-form-label">友情链接名称</label>
           <div class="mws-form-item">
-            <input type="text" class="small" name='title' value=''> 
+            <input type="text" class="small" name='title' value="{{old('title')}}"> 
           </div>
         </div>
         <div class="mws-form-row">
           <label class="mws-form-label">友情链接地址</label>
           <div class="mws-form-item">
-            <input type="text" class="small" name='url' value=''> 
+            <input type="text" class="small" name='url' value="{{old('url')}}"> 
           </div>
         </div>
         <div class="mws-form-row">

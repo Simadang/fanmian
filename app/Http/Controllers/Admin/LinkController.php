@@ -6,18 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LinkInsertRequest;
 use App\Models\sad_link;
 
 class LinkController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 显示所有的友情链接
      *
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $count = $request -> input('count',10);
+        $count = $request -> input('count',3);
         $search = $request -> input('search','');
         $request = $request -> all();
         // $data = Sad_link::where('title','like','%'.$search.'%')->paginate($count);
@@ -30,7 +31,7 @@ class LinkController extends Controller
     }
 
     /**
-     * 跳转至友情链接.
+     * 跳转至添加友情链接.
      *
      * @return \Illuminate\Http\Response
      */
@@ -44,15 +45,14 @@ class LinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LinkInsertRequest $request)
     {
+        // dd($request);
         // 获取所有信息
         $data = $request ->all();
 
-        // dd($data);
         // 处理插入
         $link = new Sad_link;
-        // dd($link);
         $link->title = $data['title'];
         $link->url = $data['url'];
         $link->status = $data['status'];
@@ -80,7 +80,31 @@ class LinkController extends Controller
 
     }
 
+    /**
+     * 修改友情链接.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
+    public function update(Request $request, $id)
+    {
+        // 获取所有信息
+        $data = $request ->all();
+        // 获取原数据库信息
+        $data2 = Sad_link::find($id);
+        // 处理修改
+        $data2->title = $data['title'];
+        $data2->url = $data['url'];
+        $data2->status = $data['status'];
+
+        if($data2->save())
+        {
+            return redirect('/admin/link')->with('success','修改成功');
+        }else{
+            return back()->with('error','修改失败');
+        }
+
+    }
 
     /**
      * 删除友情链接.
@@ -98,10 +122,10 @@ class LinkController extends Controller
         $data = [];
         $re =  Sad_link::find($id)->delete();
         if($re){
-            // $data['status']= 0;
+            $data['status']= 0;
             $data['msg']='删除成功';
         }else{
-           // $data['status']= 1;
+           $data['status']= 1;
            $data['msg']='删除失败';
         }
         return $data;

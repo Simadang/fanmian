@@ -24,7 +24,7 @@
         <div class="mws-form-row">
           <label class="mws-form-label">友情链接名称</label>
           <div class="mws-form-item">
-            <input type="text" class="small" name='title' value="{{ $data->title}}"> 
+            <input type="text" class="small" name='title' value="{{$data->title}}" readonly> 
           </div>
         </div>
         <div class="mws-form-row">
