@@ -14,8 +14,8 @@
 <link rel="stylesheet" type="text/css" href="/d/plugins/colorpicker/colorpicker.css" media="screen">
 
 
-<link rel="stylesheet" type="text/css" href="/d/custom-plugins/wizard/wizard.css" media="screen">
 
+<link rel="stylesheet" type="text/css" href="/d/custom-plugins/wizard/wizard.css" media="screen">
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="/d/bootstrap/css/bootstrap.min.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/fonts/ptsans/stylesheet.css" media="screen">
@@ -37,6 +37,7 @@
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
 
 <link rel="stylesheet" type="text/css" href="/d/css/page_page.css">
+
 
 
 <title>{{ Config::get('app.title') }}</title>
@@ -237,13 +238,39 @@
             </div>
             
 
-        	<!-- Searchbox -->
-        	<div id="mws-searchbox" class="mws-inset">
-            	<form action="typography.html">
-                	<input type="text" class="mws-search-input" placeholder="Search...">
-                    <button type="submit" class="mws-search-submit"><i class="icon-search"></i></button>
-                </form>
-            </div>
+
+
+           <!--  <div id="mws-navigation">
+                <ul>                    
+                    <li class="active">
+                        <a href="/admin/#"><i class="icon-list"></i>用户管理</a>
+                        <ul>
+                            <li class="active">
+                            <a href="" class="icon-list">后台管理员管理</a>
+                            <ul>
+                                <li style="text-align:center;"><a href="/admin/user/create"><span style="color:#960E81; font-size:12px;">用户添加</span></a></li>
+                                <li style="text-align:center;"><a href="/admin/user"><span style="color:#960E81; font-size:12px;">用户列表</span></a></li>
+                            </ul>
+                            </li>
+                            <li><a href="" class="icon-list">前台普通用户管理</a>
+                                <ul>
+                                <li style="text-align:center;"><a href="/admin/huser"><span style="color:#960E81; font-size:12px;">用户列表</span></a></li>
+                            </ul>
+                            </li>
+                            <li><a href="" class="icon-list">前台等级前五用户</a>
+                                <ul>
+                                <li style="text-align:center;"><a href="/admin/hexp_user"><span style="color:#960E81; font-size:12px;">用户列表</span></a></li>
+                            </ul>
+                            </li>
+                            <li><a href="" class="icon-list">前台积分前五用户</a>
+                                <ul>
+                                <li style="text-align:center;"><a href="/admin/hint_user"><span style="color:#960E81; font-size:12px;">用户列表</span></a></li>
+                            </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> -->
 
             
             <!-- Main Navigation -->
@@ -252,13 +279,31 @@
                     <li>
                         <a href="/d/#"><i class="icon-user"></i> 用户列表</a>
                         <ul>
-                            <li><a href="">用户详情</a></li>
-                            <li><a href="">用户添加</a></li>
-                            <li><a href="">权限设置</a></li>
+                            <li><a href="/admin/user">前台用户详情</a></li>
+                            <li><a href="/admin/user/create">前台用户添加</a></li>
+                            <li><a href="/admin/auser">后台用户详情</a></li>
+                            <li><a href="/admin/auser/create">后台用户添加</a></li>
+                            <!-- <li><a href="">权限设置</a></li> -->
                         </ul>
                     </li>
                     <li>
 
+                        <a href="/d/#"><i class="icon-users"></i> 角色列表</a>
+                        <ul>
+                            <li><a href="/admin/role">角色详情</a></li>
+                            <li><a href="/admin/role/create">角色添加</a></li>
+                            <!-- <li><a href="">权限设置</a></li> -->
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/d/#"><i class="icon-cogs"></i> 权限列表</a>
+                        <ul>
+                            <li><a href="/admin/permission">权限详情</a></li>
+                            <li><a href="/admin/permission/create">权限添加</a></li>
+                            <!-- <li><a href="">权限设置</a></li> -->
+                        </ul>
+                    </li>
+                    <li>
                         <a href="/admin/goods"><i class="icon-tags"></i> 商品详情</a>
                        <!--  <ul>
                             <li><a href="/admin/goods">查看商品列表</a></li>
@@ -279,6 +324,7 @@
                        <!--  <ul>
                             <li><a href="">暂时写死</a></li>
                         </ul> -->
+
                     </li>
                     <li>
                         <a href="{{ url('admin/question/index') }}"><i class="icon-network"></i> 鱼塘管理</a>
@@ -287,10 +333,17 @@
                         </ul> -->
                     </li>
                     <li>
-                        <a href="/d/#"><i class="icon-cog-3"></i> 网站管理</a>
+                        <a href="/d/#"><i class="icon-delicious"></i> 网站配置</a>
+                        <ul>
+                            <li><a href="/admin/config">网站配置主页</a></li>
+                            <li><a href="/admin/config/create">网站配置添加</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/d/#"><i class="icon-cog-3"></i> 广告管理</a>
                         <ul>
                             <li><a href="">广告管理</a></li>
-                            <li><a href="">网站配置</a></li>
+
                         </ul>
                     </li>
                     <li>

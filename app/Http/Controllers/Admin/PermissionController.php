@@ -1,17 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\sad_order;
-use App\Models\sad_home_user;
-use App\Models\sad_goods;
-use DB;
+use App\Models\Permission;
+use App\Http\Requests\PerInsertRequest;
 
-class OrderController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,21 +17,11 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        $count = $request -> input('count',3);
+        $count = $request -> input('count',10);
         $search = $request -> input('search','');
         $request = $request -> all();
-
-        // 获取订单列表详情
-        $data = sad_order::where('temp','like','%'.$search.'%')->paginate($count);
-
-
-
-        // $info = sad_order::join('home_user','order.uid','=','home_user.id')->get();
-        
-
-        // Tag::where('tag_name','like','%'.$keys.'%')->join('zy_category','zy_tag.cid','=','zy_category.id')->orderBy('tag_id','asc')->paginate($count);
-
-        return view('admin.order.show',['data'=>$data,'request'=>$request]);
+        $permission = permission::where('name','like','%'.$search.'%')->paginate($count);
+        return view('admin.permission.index',['permission'=>$permission,'request'=>$request]);
     }
 
     /**
@@ -44,7 +31,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.permission.add',['title'=>'权限添加']);
     }
 
     /**
@@ -53,9 +40,19 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PerInsertRequest $request)
     {
-        //
+        $data = $request -> all();
+        // 处理插入
+        $permission = new Permission;
+        $permission->name = $data['name'];
+        $permission->description = $data['description'];
+
+        if($permission->save()){
+            return redirect('/admin/permission')->with('success','添加成功');
+        }else{
+            return back()->with('error','添加失败');
+        }
     }
 
     /**
@@ -66,31 +63,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        // 1 查询此id下买家信息
        
-        $b = DB::table('order') ->find($id);
-
-        $str ='<table class="mws-table mws-datatable dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
-                <tr>
-                    <th>买家昵称</th>
-                    <th>收件人姓名</th>
-                    <th>收件人地址</th>
-                    <th>收件人电话</th>
-                </tr>';
-
-        
-            $str.= "<tr>
-
-                    <td class='tc''>{$b['uid']}</td>
-
-                    <td class='tc'>{$b['name']}</td>
-                    <td class='tc'>{$b['address']}</td>
-                    <td class='tc'>{$b['tel']}</td>
-                    </tr>";
-
-            $str.= '</table>';
-            return $str;
-
     }
 
     /**
@@ -101,7 +74,8 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Permission::find($id);
+        return view('admin.permission.edit',['title'=>'权限修改','data'=>$data]);
     }
 
     /**
@@ -113,7 +87,20 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request ->all();
+        // 获取原数据库信息
+        $data2 = permission::find($id);
+        // 处理修改
+        $data2->name = $data['name'];
+        $data2->description = $data['description'];
+
+
+        if($data2->save())
+        {
+            return redirect('/admin/permission')->with('success','修改成功');
+        }else{
+            return back()->with('error','修改失败');
+        }
     }
 
     /**
@@ -125,12 +112,12 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $data = [];
-        $re =  Sad_order::find($id)->delete();
+        $re =  Permission::find($id)->delete();
         if($re){
-            $data['status']= 0;
+            // $data['status']= 0;
             $data['msg']='删除成功';
         }else{
-           $data['status']= 1;
+           // $data['status']= 1;
            $data['msg']='删除失败';
         }
         return $data;

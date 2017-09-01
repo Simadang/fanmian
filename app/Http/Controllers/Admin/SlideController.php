@@ -66,6 +66,25 @@ class SlideController extends Controller
         } 
 
 
+                $data =$request ->input('pic');
+                if($data == ""){
+                	 return back() ->with('errors',"不能提交空数据");
+                }else{
+                	  //添加数据库
+                $user = new sad_slide;
+                 $user ->pic = $data;
+                 $user ->url = $name;
+                if($user ->save()){
+                    return redirect('admin/slide') ->with('success','添加成功');
+                }else{
+                    return back() -> with('errors','添加失败');
+                }
+
+
+                }
+
+              
+
          $data =$request ->input('pic');
                             //添加数据库
                     //判断是否提交了空数据

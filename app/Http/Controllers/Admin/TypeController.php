@@ -113,6 +113,7 @@ class TypeController extends Controller
         $res = DB::table('type')->where('pid',$id)->first();
         
 
+
         if($res){
             return back()->with('error','当前类别有子类，不允许修改');
         }
