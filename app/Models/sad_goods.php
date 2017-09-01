@@ -11,7 +11,6 @@ class sad_goods extends Model
 
     // 取消时间戳
     public $timestamps = false;
-
     // 对前台用户列表一对多
     // 此表为副表1
     public function home_user()

@@ -13,6 +13,7 @@
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/d/plugins/colorpicker/colorpicker.css" media="screen">
 
+<link rel="stylesheet" type="text/css" href="/d/custom-plugins/wizard/wizard.css" media="screen">
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="/d/bootstrap/css/bootstrap.min.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/fonts/ptsans/stylesheet.css" media="screen">
@@ -33,6 +34,7 @@
 <link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/page_page.css">
+
 
 <title>{{ Config::get('app.title') }}</title>
 
@@ -141,7 +143,8 @@
                         <ul class="mws-messages">
                         	<li class="read">
                             	<a href="/d/#">
-                                    <span class="sender">John Doe</span>
+
+                                    <span class="sender">admin</span>
                                     <span class="message">
                                         Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
                                     </span>
@@ -203,7 +206,8 @@
                 <div id="mws-user-functions">
                     <div id="mws-username">admin</div>
                     <ul>
-                        <li><a href="/d/#">简况</a></li>
+
+                    	<li><a href="/d/#">简况</a></li>
                         <li><a href="{{ url('admin/pass') }}">修改密码</a></li>
                         <li><a href="{{ url('admin/login/logout') }}">退出</a></li>
                     </ul>
@@ -230,6 +234,39 @@
             </div>
             
 
+
+
+           <!--  <div id="mws-navigation">
+                <ul>                    
+                    <li class="active">
+                        <a href="/admin/#"><i class="icon-list"></i>用户管理</a>
+                        <ul>
+                            <li class="active">
+                            <a href="" class="icon-list">后台管理员管理</a>
+                            <ul>
+                                <li style="text-align:center;"><a href="/admin/user/create"><span style="color:#960E81; font-size:12px;">用户添加</span></a></li>
+                                <li style="text-align:center;"><a href="/admin/user"><span style="color:#960E81; font-size:12px;">用户列表</span></a></li>
+                            </ul>
+                            </li>
+                            <li><a href="" class="icon-list">前台普通用户管理</a>
+                                <ul>
+                                <li style="text-align:center;"><a href="/admin/huser"><span style="color:#960E81; font-size:12px;">用户列表</span></a></li>
+                            </ul>
+                            </li>
+                            <li><a href="" class="icon-list">前台等级前五用户</a>
+                                <ul>
+                                <li style="text-align:center;"><a href="/admin/hexp_user"><span style="color:#960E81; font-size:12px;">用户列表</span></a></li>
+                            </ul>
+                            </li>
+                            <li><a href="" class="icon-list">前台积分前五用户</a>
+                                <ul>
+                                <li style="text-align:center;"><a href="/admin/hint_user"><span style="color:#960E81; font-size:12px;">用户列表</span></a></li>
+                            </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div> -->
             
             <!-- Main Navigation -->
             <div id="mws-navigation">
@@ -237,9 +274,27 @@
                     <li>
                         <a href="/d/#"><i class="icon-user"></i> 用户列表</a>
                         <ul>
-                            <li><a href="">用户详情</a></li>
-                            <li><a href="">用户添加</a></li>
-                            <li><a href="">权限设置</a></li>
+                            <li><a href="/admin/user">前台用户详情</a></li>
+                            <li><a href="/admin/user/create">前台用户添加</a></li>
+                            <li><a href="/admin/auser">后台用户详情</a></li>
+                            <li><a href="/admin/auser/create">后台用户添加</a></li>
+                            <!-- <li><a href="">权限设置</a></li> -->
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/d/#"><i class="icon-users"></i> 角色列表</a>
+                        <ul>
+                            <li><a href="/admin/role">角色详情</a></li>
+                            <li><a href="/admin/role/create">角色添加</a></li>
+                            <!-- <li><a href="">权限设置</a></li> -->
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/d/#"><i class="icon-cogs"></i> 权限列表</a>
+                        <ul>
+                            <li><a href="/admin/permission">权限详情</a></li>
+                            <li><a href="/admin/permission/create">权限添加</a></li>
+                            <!-- <li><a href="">权限设置</a></li> -->
                         </ul>
                     </li>
                     <li>
@@ -269,10 +324,16 @@
                         </ul> -->
                     </li>
                     <li>
-                        <a href="/d/#"><i class="icon-cog-3"></i> 网站管理</a>
+                        <a href="/d/#"><i class="icon-delicious"></i> 网站配置</a>
+                        <ul>
+                            <li><a href="/admin/config">网站配置主页</a></li>
+                            <li><a href="/admin/config/create">网站配置添加</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/d/#"><i class="icon-cog-3"></i> 广告管理</a>
                         <ul>
                             <li><a href="">广告管理</a></li>
-                            <li><a href="">网站配置</a></li>
                         </ul>
                     </li>
                     <li>
@@ -337,7 +398,6 @@
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
-
 
 
     <!-- jQuery-UI Dependent Scripts -->
