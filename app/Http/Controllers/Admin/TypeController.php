@@ -45,6 +45,12 @@ class TypeController extends Controller
    */ 
    public function getCreate($id = '')
     {
+        
+            //
+
+
+
+
         // 加载模版
         return view('admin.type.create',['data'=>self::getCates(),'id'=>$id]);
     } 
