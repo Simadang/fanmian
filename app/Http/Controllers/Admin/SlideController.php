@@ -31,17 +31,9 @@ class SlideController extends Controller
      */
     public function create()
     {
-       
-
-
-
-
-
-
 
         return view('admin.slide.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -73,6 +65,7 @@ class SlideController extends Controller
              
         } 
 
+
          $data =$request ->input('pic');
                             //添加数据库
                     //判断是否提交了空数据
@@ -91,9 +84,6 @@ class SlideController extends Controller
                             }
 
                     }
-
-               
-
 
     }
 

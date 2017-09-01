@@ -45,11 +45,6 @@ class TypeController extends Controller
    */ 
    public function getCreate($id = '')
     {
-        
-            //
-
-
-
 
         // 加载模版
         return view('admin.type.create',['data'=>self::getCates(),'id'=>$id]);
@@ -112,8 +107,12 @@ class TypeController extends Controller
      */
     public function postUpdate(Request $request,$id)
     {
+
+        
         // 查询 当前分类下面是否有子类
         $res = DB::table('type')->where('pid',$id)->first();
+        
+
         if($res){
             return back()->with('error','当前类别有子类，不允许修改');
         }
