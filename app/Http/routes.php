@@ -135,6 +135,7 @@ Route::group(['middleware'=>'Login'],function(){
 	Route::controller('admin/type','Admin\TypeController');
 	//轮播图管理的路由
 	Route::resource('admin/slide','Admin\SlideController');
+	Route::post('admin/upload','Admin\SlideController@upload');
 });
 //前台主页面的路由   |   分类显示前台的路由
 Route::resource('home/index','Home\IndexController');
