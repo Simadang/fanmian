@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 //刘红英 19~119行 111
@@ -133,19 +133,30 @@ Route::group(['middleware'=>'Login'],function(){
 	Route::post('admin/pass','Admin\PassController@dopass');
 	//商品分类
 	Route::controller('admin/type','Admin\TypeController');
+	//修改分类的状态显示
+	// Route::get('admin/type/status','Admin\TypeController@status');
 	//轮播图管理的路由
 	Route::resource('admin/slide','Admin\SlideController');
+	Route::post('admin/upload','Admin\SlideController@upload');
+	//鱼塘
+	Route::controller('/admin/question','Admin\QuestionController');
+	Route::get('/admin/question/answer/{id}','Admin\QuestionController@answer');
+	Route::get('/admin/question/delete/{id}','Admin\QuestionController@delete');
 });
 //前台主页面的路由   |   分类显示前台的路由
-Route::resource('home/index','Home\IndexController');
+Route::resource('/','Home\IndexController');
 //轮播图在前台显示的路由
 Route::get('/lun','Home\IndexController@lun');
-//鱼塘
-Route::controller('/admin/question','Admin\QuestionController');
-Route::get('/admin/question/answer/{id}','Admin\QuestionController@answer');
-Route::get('/admin/question/delete/{id}','Admin\QuestionController@delete');
-
-
+//个人中心也面的引入路由
+Route::get('/user','Home\UserController@index');
+Route::get('/user/detail','Home\UserController@detail');
+Route::get('/user/idcard','Home\UserController@idcard');
+Route::get('/user/address','Home\UserController@address');
+Route::get('/user/order','Home\UserController@order');
+Route::get('/user/password','Home\UserController@password');
+Route::get('/user/bindphone','Home\UserController@bindphone');
+Route::get('/user/email','Home\UserController@email');
+Route::controller('/pay','Home\PayController');
 
 
 

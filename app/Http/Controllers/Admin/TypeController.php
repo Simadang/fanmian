@@ -140,4 +140,35 @@ class TypeController extends Controller
         }
     }
 
+    /*
+    *
+    *分类状态的改变
+    *
+    *
+    */
+    public function getStatus($id)
+    {
+        //获取用户提交的数据
+        $data = DB::table('type')->where('id',$id)->get();
+               if($data[0]['status'] == 0){
+                    // $data[0]['status'] == 1;
+                    //把该数据保存到数据库中
+            $sta = DB::table('type')->where('id',$id)->update(['status'=>1]);
+                    if($sta){
+                        return redirect('admin/type/index');
+                    }else{
+                         return back()->with('errors','修改成功');
+                    }
+               }else{
+                    // $data[0]['status'] == 0; 
+           $sta = DB::table('type')->where('id',$id)->update(['status'=>0]); 
+                     if($sta){
+                        return redirect('admin/type/index');
+                    }else{
+                         return back()->with('errors','修改成功');
+                    }       
+               }
+        
+    }
+
 }
