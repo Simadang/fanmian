@@ -45,6 +45,7 @@ class TypeController extends Controller
    */ 
    public function getCreate($id = '')
     {
+
         // 加载模版
         return view('admin.type.create',['data'=>self::getCates(),'id'=>$id]);
     } 
@@ -106,10 +107,13 @@ class TypeController extends Controller
      */
     public function postUpdate(Request $request,$id)
     {
+
         
         // 查询 当前分类下面是否有子类
         $res = DB::table('type')->where('pid',$id)->first();
         
+
+
         if($res){
             return back()->with('error','当前类别有子类，不允许修改');
         }
@@ -134,6 +138,37 @@ class TypeController extends Controller
         }else{
             return back()->with('error','修改失败');
         }
+    }
+
+    /*
+    *
+    *分类状态的改变
+    *
+    *
+    */
+    public function getStatus($id)
+    {
+        //获取用户提交的数据
+        $data = DB::table('type')->where('id',$id)->get();
+               if($data[0]['status'] == 0){
+                    // $data[0]['status'] == 1;
+                    //把该数据保存到数据库中
+            $sta = DB::table('type')->where('id',$id)->update(['status'=>1]);
+                    if($sta){
+                        return redirect('admin/type/index');
+                    }else{
+                         return back()->with('errors','修改成功');
+                    }
+               }else{
+                    // $data[0]['status'] == 0; 
+           $sta = DB::table('type')->where('id',$id)->update(['status'=>0]); 
+                     if($sta){
+                        return redirect('admin/type/index');
+                    }else{
+                         return back()->with('errors','修改成功');
+                    }       
+               }
+        
     }
 
 }

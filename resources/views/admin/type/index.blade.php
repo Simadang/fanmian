@@ -24,7 +24,7 @@
                     <td>{{$v['name']}}</td>
                     <td>{{$v['pid']}}</td>
                     <td>{{$v['path']}}</td>
-                    <td>{{$v['status'] == 0 ? '启用' : '未启用'}}</td>
+                    <td><a href="/admin/type/status/{{ $v['id'] }}">{{$v['status'] == 0 ? '启用' : '禁用'}}</a></td>
                     <td align="center">
                     	<a href="/admin/type/delete/{{$v['id']}}">删除</a>　
                     	<a href="/admin/type/edit/{{$v['id']}}">修改</a>　

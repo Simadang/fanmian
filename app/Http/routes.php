@@ -216,18 +216,16 @@ Route::get('/admin/question/delete/{id}','Admin\QuestionController@delete');
 
 
 
-
-
-
-
 //陈杰 219~319
-
-
-
-
-
-
-
+Route::resource('home/regist','home\RegistController');
+Route::resource('/jihuo','home\RegistController@Jihuo');
+Route::post('home/regist/yanzheng1','home\RegistController@yanzheng1');
+Route::post('home/regist/yanzheng2','home\RegistController@yanzheng2');
+Route::post('home/regist/yanzheng3','home\RegistController@yanzheng3');
+Route::controller('home/login','Home\LoginController');
+Route::post('/home/regist/insert','Home\RegistController@insert');
+Route::get('/phoneCode','Home\RegistController@phoneCode');
+Route::controller('/home/forget','Home\ForgetController');
 
 
 
@@ -317,14 +315,12 @@ Route::get('/admin/question/delete/{id}','Admin\QuestionController@delete');
 
 
 //李韶凡319~419
-
+// 后台友情链接路由
 Route::resource('/admin/link','Admin\LinkController');
+// 后台商品页面路由
 Route::resource('/admin/goods','Admin\GoodsController');
+// 后台订单页面路由
 Route::resource('/admin/order','Admin\OrderController');
-
-
-
-
 
 
 
