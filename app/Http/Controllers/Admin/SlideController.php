@@ -175,7 +175,7 @@ class SlideController extends Controller
 //            $pic = $file->getRealPath();
 //            $result = OSS::upload('uploads/'.$newName, $pic);
 
-            $filepath = 'uploads/'.$newName;
+            $filepath ='uploads/'.$newName;
             return  $filepath;
         }
     }

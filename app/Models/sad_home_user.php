@@ -18,6 +18,10 @@ class sad_home_user extends Model
     {
     	return $this->hasMany('App\Models\sad_goods','uid','id');
     }
-
-
+    //对用户详情表一对一
+    //此表为主表
+    public function detail()
+    {
+        return $this->hasOne('App\Models\sad_userinfo','uid','id');
+    }
 }

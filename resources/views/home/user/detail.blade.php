@@ -1,11 +1,11 @@
-@extends('home.layout2.index')
+@extends('home.layout.left')
 
-@section('content')
-<div class="main-wrap">
+@section('left')
+<script src="/h/My97DatePicker/WdatePicker.js"></script>
 <div class="user-info">
 						<!--标题 -->
 						<div class="am-cf am-padding">
-							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人信息</strong> / <small>Personal&nbsp;information</small></div>
 						</div>
 						<hr>
 
@@ -14,22 +14,22 @@
 
 							<div class="filePic">
 								<input class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*" type="file">
-								<img class="am-circle am-img-thumbnail" src="/qiantai/images/getAvatar.do.jpg" alt="">
+								<img class="am-circle am-img-thumbnail" src="{{ $info[0]['photo'] }}" alt="">
 							</div>
 
 							<p class="am-form-help">头像</p>
 
 							<div class="info-m">
-								<div><b>用户名：<i>小叮当</i></b></div>
+								<div><b>用户名：<i>{{ $user['username'] }}</i></b></div>
 								<div class="u-level">
 									<span class="rank r2">
-							             <s class="vip1"></s><a class="classes" src="/qiantai/#">铜牌会员</a>
+							             <s class="vip1"></s><a class="classes" href="#">铜牌会员</a>
 						            </span>
 								</div>
 								<div class="u-safety">
-									<a src="/qiantai/safety.html">
-									 账户安全
-									<span class="u-profile"><i class="bc_ee0000" style="width: 60px;" width="0">60分</i></span>
+									<a href="safety.html">
+									 用户积分
+									<span class="u-profile"><i class="bc_ee0000" style="width: 60px;" width="0">{{ $info[0]['code'] }}</i></span>
 									</a>
 								</div>
 							</div>
@@ -37,12 +37,26 @@
 
 						<!--个人信息 -->
 						<div class="info-main">
-							<form class="am-form am-form-horizontal">
-
+							   @if (count($errors) > 0)
+                <div class="mws-form-message warning">
+                    <ul>
+                        @if(is_object($errors))
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        @else
+                            <li>{{ $errors }}</li>
+                        @endif
+                    </ul>
+                </div>
+            @endif
+      {{--<p style="color:red">用户名错误</p>--}}
+							<form class="am-form am-form-horizontal" action="{{ url('user/update') }}" method="post">
+										{{ csrf_field() }}
 								<div class="am-form-group">
 									<label for="user-name2" class="am-form-label">昵称</label>
 									<div class="am-form-content">
-										<input id="user-name2" placeholder="nickname" type="text">
+										<input id="user-name2" name="nickname" value="{{ $info[0]['nickname'] }}" placeholder="nickname" type="text">
 
 									</div>
 								</div>
@@ -50,7 +64,7 @@
 								<div class="am-form-group">
 									<label for="user-name" class="am-form-label">姓名</label>
 									<div class="am-form-content">
-										<input id="user-name2" placeholder="name" type="text">
+										<input id="user-name2" name="username" placeholder="name" value="{{ $user['username'] }}" type="text">
 
 									</div>
 								</div>
@@ -58,61 +72,41 @@
 								<div class="am-form-group">
 									<label class="am-form-label">性别</label>
 									<div class="am-form-content sex">
-										<label class="am-radio-inline">
-											<input name="radio10" value="male" data-am-ucheck="" class="am-ucheck-radio" type="radio"><span class="am-ucheck-icons"><i class="am-icon-unchecked"></i><i class="am-icon-checked"></i></span> 男
+											<label class="am-radio-inline">
+											<input type="radio" name="sex" value="0" data-am-ucheck    {{ $info[0]['sex']=='0' ? 'checked' : '' }}> 男
 										</label>
 										<label class="am-radio-inline">
-											<input name="radio10" value="female" data-am-ucheck="" class="am-ucheck-radio" type="radio"><span class="am-ucheck-icons"><i class="am-icon-unchecked"></i><i class="am-icon-checked"></i></span> 女
+											<input type="radio" name="sex" value="1" data-am-ucheck    {{ $info[0]['sex']=='1' ? 'checked' : '' }}> 女
 										</label>
-										<label class="am-radio-inline">
-											<input name="radio10" value="secret" data-am-ucheck="" class="am-ucheck-radio" type="radio"><span class="am-ucheck-icons"><i class="am-icon-unchecked"></i><i class="am-icon-checked"></i></span> 保密
-										</label>
+										
 									</div>
 								</div>
 
 								<div class="am-form-group">
 									<label for="user-birth" class="am-form-label">生日</label>
 									<div class="am-form-content birth">
-										<div class="birth-select">
-											<select data-am-selected="" style="display: none;">
-												<option value="a">2015</option>
-												<option value="b">1987</option>
-											</select><div class="am-selected am-dropdown " id="am-selected-srglx" data-am-dropdown="">  <button type="button" class="am-selected-btn am-btn am-dropdown-toggle am-btn-default">    <span class="am-selected-status am-fl">2015</span>    <i class="am-selected-icon am-icon-caret-down"></i>  </button>  <div class="am-selected-content am-dropdown-content">    <h2 class="am-selected-header"><span class="am-icon-chevron-left">返回</span></h2>       <ul class="am-selected-list">                     <li class="am-checked" data-index="0" data-group="0" data-value="a">         <span class="am-selected-text">2015</span>         <i class="am-icon-check"></i></li>                                 <li class="" data-index="1" data-group="0" data-value="b">         <span class="am-selected-text">1987</span>         <i class="am-icon-check"></i></li>            </ul>    <div class="am-selected-hint"></div>  </div></div>
-											<em>年</em>
-										</div>
-										<div class="birth-select2">
-											<select data-am-selected="" style="display: none;">
-												<option value="a">12</option>
-												<option value="b">8</option>
-											</select><div class="am-selected am-dropdown " id="am-selected-4h4gt" data-am-dropdown="">  <button type="button" class="am-selected-btn am-btn am-dropdown-toggle am-btn-default">    <span class="am-selected-status am-fl">12</span>    <i class="am-selected-icon am-icon-caret-down"></i>  </button>  <div class="am-selected-content am-dropdown-content">    <h2 class="am-selected-header"><span class="am-icon-chevron-left">返回</span></h2>       <ul class="am-selected-list">                     <li class="am-checked" data-index="0" data-group="0" data-value="a">         <span class="am-selected-text">12</span>         <i class="am-icon-check"></i></li>                                 <li class="" data-index="1" data-group="0" data-value="b">         <span class="am-selected-text">8</span>         <i class="am-icon-check"></i></li>            </ul>    <div class="am-selected-hint"></div>  </div></div>
-											<em>月</em></div>
-										<div class="birth-select2">
-											<select data-am-selected="" style="display: none;">
-												<option value="a">21</option>
-												<option value="b">23</option>
-											</select><div class="am-selected am-dropdown " id="am-selected-40qdq" data-am-dropdown="">  <button type="button" class="am-selected-btn am-btn am-dropdown-toggle am-btn-default">    <span class="am-selected-status am-fl">21</span>    <i class="am-selected-icon am-icon-caret-down"></i>  </button>  <div class="am-selected-content am-dropdown-content">    <h2 class="am-selected-header"><span class="am-icon-chevron-left">返回</span></h2>       <ul class="am-selected-list">                     <li class="am-checked" data-index="0" data-group="0" data-value="a">         <span class="am-selected-text">21</span>         <i class="am-icon-check"></i></li>                                 <li class="" data-index="1" data-group="0" data-value="b">         <span class="am-selected-text">23</span>         <i class="am-icon-check"></i></li>            </ul>    <div class="am-selected-hint"></div>  </div></div>
-											<em>日</em></div>
+										<input type="text" class="Wdate birth-select" onClick="WdatePicker()" name="birthday" value="{{ $info[0]['birthday'] }}">
 									</div>
 							
 								</div>
 								<div class="am-form-group">
 									<label for="user-phone" class="am-form-label">电话</label>
 									<div class="am-form-content">
-										<input id="user-phone" placeholder="telephonenumber" type="tel">
+										<input id="user-phone" name="phone" value="{{ $user['phone'] }}" placeholder="telephonenumber" type="tel">
 
 									</div>
 								</div>
 								<div class="am-form-group">
 									<label for="user-email" class="am-form-label">电子邮件</label>
 									<div class="am-form-content">
-										<input id="user-email" placeholder="Email" type="email">
+										<input id="user-email" name="email" value="{{ $user['email'] }}" placeholder="Email" type="email">
 
 									</div>
 								</div>
 								<div class="am-form-group address">
 									<label for="user-address" class="am-form-label">收货地址</label>
 									<div class="am-form-content address">
-										<a src="/qiantai/address.html">
+										<a href="address.html">
 											<p class="new-mu_l2cw">
 												<span class="province">湖北</span>省
 												<span class="city">武汉</span>市
@@ -127,7 +121,7 @@
 								<div class="am-form-group safety">
 									<label for="user-safety" class="am-form-label">账号安全</label>
 									<div class="am-form-content safety">
-										<a src="/qiantai/safety.html">
+										<a href="safety.html">
 
 											<span class="am-icon-angle-right"></span>
 
@@ -136,13 +130,13 @@
 									</div>
 								</div>
 								<div class="info-btn">
-									<div class="am-btn am-btn-danger">保存修改</div>
+									<input type="submit" class="am-btn am-btn-danger" value="保存修改">
 								</div>
 
 							</form>
 						</div>
 
 					</div>
-				</div>	
+
 
 @endsection

@@ -13,9 +13,18 @@
 		<link href="/h/css/cartstyle.css" rel="stylesheet" type="text/css" />
 
 		<link href="/h/css/jsstyle.css" rel="stylesheet" type="text/css" />
-
+		
 		<script type="text/javascript" src="/h/js/address.js"></script>
-
+		<!--城市三级联动-->
+		<script type="javascript" src="/h/js/pcasunzip.js" charset="gb2312"></script>
+		<script type="text/javascript">
+				function getValue(){ 
+				var getpro=document.getElementById("province").value;
+				var getcity=document.getElementById("city").value;
+				var getarea=document.getElementById("area").value;
+				alert(getpro+" "+getcity+" "+getarea);
+				 }
+</script>
 	</head>
 
 	<body>
@@ -90,7 +99,8 @@
 									<div class="default-address DefaultAddr">
 										<span class="buy-line-title buy-line-title-type">收货地址：</span>
 										<span class="buy--address-detail">
-								  				<span>{{ $v['address'] }}</span>
+								  				
+												 {{ $v['address'] }}
 										</span>
 
 										</span>

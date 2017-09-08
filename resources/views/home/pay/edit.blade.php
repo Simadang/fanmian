@@ -15,11 +15,21 @@
 		<link href="/h/css/jsstyle.css" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript" src="/h/js/address.js"></script>
+			<!--城市三级联动-->
+		<script src="/h/js/pcasunzip.js" charset="gb2312"></script>
+		<script type="text/javascript">
+				function getValue(){ 
+				var getpro=document.getElementById("province").value;
+				var getcity=document.getElementById("city").value;
+				var getarea=document.getElementById("area").value;
+				alert(getpro+" "+getcity+" "+getarea);
+				 }
+</script>
 
 	</head>
 
 	<body>
-
+	
 		<!--顶部导航条 -->
 		<div class="am-container header">
 			<ul class="message-l">
@@ -107,11 +117,21 @@
 								
 							</div>
 						</div>
-
+						
 						<div class="am-form-group">
 							<label for="user-intro" class="am-form-label">详细地址</label>
-							<div class="am-form-content">
-								<textarea class="" rows="3" id="user-intro"name="address" placeholder="输入详细地址">{{$res['address'] }}</textarea>
+							<div class="am-form-content" style="float:left">
+								<fieldset style="padding:5px;">
+								<legend>省市地区联动</legend>
+								出　　 生 　地：<select name="user.province" id="province"></select>
+												<select name="user.city" id="city"></select>
+												<select name="user.area" id="area"></select><br>
+												<script language="javascript" defer>
+								new PCAS("user.province","user.city","user.area","山东省","济南市","济南市");
+
+								</script>
+								 <input type="button" name="bt" id="bt" value="测试" onclick="getValue()">
+								</fieldset>
 								<small>100字以内写出你的详细地址...</small>
 							</div>
 						</div>
@@ -125,6 +145,7 @@
 						</div>
 						<!-- <a href="{{ url('pay') }}"><button>取消修改</button></a> -->
 					</form>
+					
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
 					<a href="{{ url('pay') }}"><button>取消修改</button></a>

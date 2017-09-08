@@ -11,14 +11,15 @@
 								
 								@foreach($data1 as $key=>$value)
 							
-								dd($value);
+								
 								<li class="banner2"><a><img src="{{$value['url'] }}" /></a></li>
 								
 								@endforeach
 							</ul>
 						</div>
 						<div class="clear"></div>	
-			</div> </center>
+			</div> 
+			</center>
 				
 
 			<div class="shopNav">
@@ -427,5 +428,7 @@
                  <div class="clear "></div>  
                  </div>
 
+					
+   
 
 @endsection
