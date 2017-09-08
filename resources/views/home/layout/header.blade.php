@@ -16,6 +16,13 @@
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
 		<script src="/h/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 		<script src="/h/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+<<<<<<< HEAD
+=======
+
+		<link href="h/css/seastyle.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="/h/basic/js/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="/h/js/script.js"></script>
+>>>>>>> b3492246aeb21fbfa401a15e1f68966ce19f3daf
 
 	</head>
 
@@ -34,10 +41,17 @@
 						</ul>
 						<ul class="message-r">
 							<div class="topMessage home">
+<<<<<<< HEAD
 								<div class="menu-hd"><a href="{{ url('/') }}" target="_top" class="h">商城首页</a></div>
 							</div>
 							<div class="topMessage my-shangcheng">
 								<div class="menu-hd MyShangcheng"><a href="{{ url('user') }}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+=======
+								<div class="menu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+							</div>
+							<div class="topMessage my-shangcheng">
+								<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+>>>>>>> b3492246aeb21fbfa401a15e1f68966ce19f3daf
 							</div>
 							<div class="topMessage mini-cart">
 								<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
@@ -53,6 +67,7 @@
 							<div class="logoBig">
 								<li><img src="/h/images/logo-search.png"></li>
 							</div>
+<<<<<<< HEAD
 
 							<div class="search-bar pr">
 								<a name="index_none_header_sysc" href="#"></a>
@@ -63,6 +78,18 @@
 							</div>
 						</div>
 
+=======
+
+							<div class="search-bar pr">
+								<a name="index_none_header_sysc" href="#"></a>
+								<form>
+									<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+									<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+								</form>
+							</div>
+						</div>
+
+>>>>>>> b3492246aeb21fbfa401a15e1f68966ce19f3daf
 						<div class="clear"></div>
 					</div>
 				

@@ -20,5 +20,14 @@ class sad_type extends Model
     	return $this->hasMany('App\Models\sad_goods','tid','id');
     }
 
+<<<<<<< HEAD
 
+=======
+    // 对前台主页列表一对多
+    // 此表为主表2
+    // public function type2()
+    // {
+    //     return $this->hasMany('App\Models\sad_question','tid','id');
+    // }
+>>>>>>> b3492246aeb21fbfa401a15e1f68966ce19f3daf
 }

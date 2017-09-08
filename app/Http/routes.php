@@ -118,14 +118,9 @@
 
 //孙林晋 119~219
 
-//后台登录管理路由
-Route::get('admin/login','Admin\LoginController@login');
-//后台登录添加动作的路由
-Route::post('admin/login','Admin\LoginController@dologin');
-//验证码的路由
-Route::get('/code','Code\CodeController@index');
-//用户退出登录的路由
+//用户登录后的路由
 Route::group(['middleware'=>'Login'],function(){
+	// 用户退出的路由
 	Route::get('admin/login/logout','Admin\LoginController@logout');
 	//用户修改密码的路由
 	Route::get('admin/pass','Admin\PassController@index');
@@ -136,6 +131,7 @@ Route::group(['middleware'=>'Login'],function(){
 	//轮播图管理的路由
 	Route::resource('admin/slide','Admin\SlideController');
 	Route::post('admin/upload','Admin\SlideController@upload');
+<<<<<<< HEAD
 	//鱼塘
 	Route::controller('/admin/question','Admin\QuestionController');
 	Route::get('/admin/question/answer/{id}','Admin\QuestionController@answer');
@@ -150,6 +146,27 @@ Route::get('/lun','Home\IndexController@lun');
 Route::controller('/pay','Home\PayController');
 //引入个人中心页面
 Route::controller('/user','Home\UserController');
+=======
+	//后台鱼塘
+	Route::controller('/admin/question','Admin\QuestionController');
+	Route::get('/admin/question/answer/{id}','Admin\QuestionController@answer');
+	Route::get('/admin/question/delete/{id}','Admin\QuestionController@delete');
+	//网站公告管理
+	Route::resource('admin/notice','Admin\NoticeController');
+
+});
+
+	//后台登录管理路由
+	Route::get('admin/login','Admin\LoginController@login');
+	//后台登录添加动作的路由
+	Route::post('admin/login','Admin\LoginController@dologin');
+	//验证码的路由
+	Route::get('/code','Code\CodeController@index');
+
+
+
+
+>>>>>>> b3492246aeb21fbfa401a15e1f68966ce19f3daf
 
 
 
@@ -230,11 +247,17 @@ Route::get('/phoneCode','Home\RegistController@phoneCode');
 Route::controller('/home/forget','Home\ForgetController');
 
 
+//前台主页面的路由   |   分类显示前台的路由
+Route::resource('/','Home\IndexController');
+//轮播图在前台显示的路由
+Route::get('/lun','Home\IndexController@lun');
 
+// 前台鱼塘答案
+Route::get('/home/answer/{id}','Home\IndexController@answer');
+Route::get('/home/question/reply/{id}','Home\IndexController@reply');
 
-
-
-
+// 前台搜索页面
+Route::resource('/search','Home\searchController');
 
 
 

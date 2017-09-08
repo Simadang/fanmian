@@ -88,5 +88,18 @@ class LoginController extends Controller
         }
     }
 
+    /*
+    *执行退出动作
+    *
+    */
+    public function getLogout(Request $request)
+        {
+            //处理用户退出登录的行为
+
+            session()->flush();
+            return redirect('/');
+
+        }
+
     
 }

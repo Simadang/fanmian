@@ -30,8 +30,15 @@ class GoodsController extends Controller
         //将商品列表中的uid替换为卖家姓名
         foreach($data as $k=>$v)
         {
+<<<<<<< HEAD
             // $info =  Sad_goods::find($v['id'])->sad_home_user->username;
             // $data[$k]['uid'] = $info;
+=======
+            $info =  sad_goods::find($v['id'])->home_user->username;
+            // dd($info);
+
+            $data[$k]['uid'] = $info;
+>>>>>>> b3492246aeb21fbfa401a15e1f68966ce19f3daf
         }
         
         //将商品列表中的tid替换为商品所属板块

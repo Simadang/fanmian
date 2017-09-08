@@ -13,7 +13,7 @@ class sad_question extends Model
     public $timestamps = false;
 
 
-       // 对商品板块列表一对多
+    // 对商品板块列表一对多
     // 此表为主表2
     public function question()
     {
