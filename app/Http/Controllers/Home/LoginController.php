@@ -54,7 +54,7 @@ class LoginController extends Controller
             //登录成功将用户信息存入session中
             session(['user'=>$user]);
 
-            return redirect('home/index');
+            return redirect('/');
 
         }else if(preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/", $input['username'])){
 
@@ -81,12 +81,25 @@ class LoginController extends Controller
             //登录成功将用户信息存入session中
             session(['user'=>$user]);
 
-            return redirect('home/index');
+            return redirect('/');
         }else{
 
             return back()->with('errors','请输入正确的账号名');
         }
     }
+
+    /*
+    *执行退出动作
+    *
+    */
+    public function getLogout(Request $request)
+        {
+            //处理用户退出登录的行为
+
+            session()->flush();
+            return redirect('/');
+
+        }
 
     
 }

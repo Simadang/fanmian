@@ -16,6 +16,7 @@
 		<link href="/h/css/skin.css" rel="stylesheet" type="text/css" />
 		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+		<script type="text/javascript" src="{{asset('d/layer/layer.js')}}"></script>
 
 	</head>
 
@@ -26,14 +27,19 @@
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
-							<a href="/h/#" target="_top" class="h">亲，请登录</a>
-							<a href="/h/#" target="_top">免费注册</a>
+							@if(session('user'))
+							<a href="javascript:;" target="_top" class="h">欢迎您,{{ session('user')['username'] }}</a>
+							<a href="{{ url('home/login/logout') }}" target="_top">[退出]</a>
+							@else
+							<a href="{{ url('home/login') }}" target="_top" class="h">亲，请登录</a>
+							<a href="{{ url('home/regist') }}" target="_top">免费注册</a>
+							@endif
 						</div>
 					</div>
 				</ul>
 				<ul class="message-r">
 					<div class="topMessage home">
-						<div class="menu-hd"><a href="{{ url('home/index') }}" target="_top" class="h">商城首页</a></div>
+						<div class="menu-hd"><a href="{{ url('/') }}" target="_top" class="h">商城首页</a></div>
 					</div>
 					<div class="topMessage my-shangcheng">
 						<div class="menu-hd MyShangcheng"><a href="/h/#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -77,7 +83,7 @@
 						@foreach($data1 as $key=>$value)
 					
 						dd($value);
-						<li class="banner2"><a><img src="{{ "/uploads".$value['url'] }}" /></a></li>
+						<li class="banner2"><a><img src="{{ $value['url'] }}" /></a></li>
 						
 						@endforeach
 					</ul>
@@ -93,11 +99,11 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="{{ url('home/index/index') }}">首页</a></li>
-                                <li class="qc"><a href="/h/#">闪购</a></li>
-                                <li class="qc"><a href="/h/#">限时抢</a></li>
-                                <li class="qc"><a href="/h/#">团购</a></li>
-                                <li class="qc last"><a href="/h/#">大包装</a></li>
+								<li class="index"><a href="{{ url('/') }}">首页</a></li>
+                                <li class="qc"><a href="/h/#">二手手机</a></li>
+                                <li class="qc"><a href="/h/#">二手汽车</a></li>
+                                <li class="qc"><a href="/h/#">二手飞机</a></li>
+                                <li class="qc last"><a href="/h/#">二手火箭</a></li>
 							</ul>
 
 	
@@ -114,7 +120,7 @@
 											@foreach($data as $k=>$v)
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><i><img src="/h/images/cake.png"></i><a class="ml-22" title="">{{ $v['name'] }}</a></h3>
+													<h3 class="category-name b-category-name"><a class="ml-22" title="">{{ $v['name'] }}</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -195,41 +201,38 @@
 	
 					<!--走马灯 -->
 					<div class="marqueen" style="margin-right:-80px;">
-						<span class="marqueen-title">商城头条</span>
+						
 						<div class="demo">
 
 							<ul>
-								<div class="member-logout">
-								<a class="am-btn-warning btn" href="login.html">发布闲置</a>
-								<a class="am-btn-warning btn" href="register.html">注册</a>
-							</div>
-
-						<div class="mod-vip">
-							<div class="m-baseinfo">
-								<a href="person/index.html">
-									<img src="images/getAvatar.do.jpg">
-								</a>
-								<em>
-									Hi,<span class="s-name">小叮当</span>
-									<a href="#"><p>点击更多优惠活动</p></a>									
-								</em>
-							</div>
-							<div class="member-logout">
-								<a class="am-btn-warning btn" href="login.html">登录</a>
-								<a class="am-btn-warning btn" href="register.html">注册</a>
-							</div>
-							<div class="member-login">
-								<a href="#"><strong>0</strong>待收货</a>
-								<a href="#"><strong>0</strong>待发货</a>
-								<a href="#"><strong>0</strong>待付款</a>
-								<a href="#"><strong>0</strong>待评价</a>
-							</div>
-							<div class="clear"></div>	
-						</div>																	    
-							    
-								<li><a target="_blank" href="#"><span>[特惠]</span>洋河年末大促，低至两件五折</a></li>
-								<li><a target="_blank" href="#"><span>[公告]</span>华北、华中部分地区配送延迟</a></li>
-								<li><a target="_blank" href="#"><span>[特惠]</span>家电狂欢千亿礼券 买1送1！</a></li>
+								<div class="">
+									<a href="person/index.html">
+										<img src="h/images/fabuxianzhi.jpg">
+									</a>
+								</div>
+								<div class="mod-vip">
+								@if(session('user'))
+									<div class="m-baseinfo">
+										<a href="person/index.html">
+											<img src="h/images/logo-search.png">
+										</a>
+										<em>
+											Hi,<span class="s-name">{{ session('user')['username'] }}</span>							
+										</em>
+									</div>
+									@else
+									<div class="member-logout">
+										<a class="am-btn-warning btn" href="{{ url('home/login') }}">登录</a>
+										<a class="am-btn-warning btn" href="{{ url('home/regist') }}">注册</a>
+									</div>
+									@endif
+									<div class="clear"></div>	
+								</div>																	    
+								<span class="marqueen-title">公告</span>
+								  
+								<li><a target="_blank" href="#">洋河年末大促，低至两件五折</a></li>
+								<li><a target="_blank" href="#">洋河年末大促，低至两件五折</a></li>
+								
 								
 							</ul>
                         <div class="advTip"><img src="images/advTip.jpg"/></div>
@@ -307,137 +310,165 @@
 					
 				
 
+@foreach($data2 as $k1=>$v1)
+            <div id="f1">
+			<!--甜点-->
+			
+			<div class="am-container ">
+				<div class="shopTitle ">
+					<h4>{{ $v1['name']}}</h4>
+					<h3>翻面,给你更好的一面</h3>
+					
+					<span class="more ">
+            <a href="/h/# ">更多二手<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+                </span>
+				</div>
+			</div>
+			
+			<div class="am-g am-g-fixed floodFour">
+				<div class="am-u-sm-5 am-u-md-4 text-one list ">
+					<div class="word">
+							
 
-                    <div id="f1">
-					<!--甜点-->
-					
-					<div class="am-container ">
-						<div class="shopTitle ">
-							<h4>科技产品</h4>
-							<h3>每一道科技品都有一个故事</h3>
-							<div class="today-brands ">
-								<a href="/h/# ">二手手机</a>
-								<a href="/h/# ">二手电脑</a>
-								<a href="/h/# ">二手相机 </a>
-								<a href="/h/# ">二手自行车</a>
-								<a href="/h/# ">准新汽车</a>
-								<a href="/h/# ">二手电动</a>
-							</div>
-							<span class="more ">
-                    <a href="/h/# ">更多二手<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
-                        </span>
-						</div>
-					</div>
-					
-					<div class="am-g am-g-fixed floodFour">
-						<div class="am-u-sm-5 am-u-md-4 text-one list ">
-							<div class="word">
-								<a class="outer" href="/h/#"><span class="inner"><b class="text">手机</b></span></a>
-								<a class="outer" href="/h/#"><span class="inner"><b class="text">电脑</b></span></a>
-																
-							</div>
-							<a href="/h/# ">
-								<div class="outer-con ">
-									<div class="title ">
-									开抢啦！
-									</div>
-									<div class="sub-title ">
-										美女大礼包
-									</div>									
-								</div>
-                                  <img src="/h/images/act1.png " />								
-							</a>
-							<div class="triangle-topright"></div>						
-						</div>
+
+							@foreach($data3 as $k3=>$v3)
+							
+							
+							@if($v3['pid'] == $v1['id'])
+								
+							<a class="outer" href="/h/#"><span class="inner"><b class="text">{{ $v3['name']}}</b></span></a>
+							
+
+							
+							@endif
+							@endforeach	
 						
-							<div class="am-u-sm-7 am-u-md-4 text-two sug">
-								<div class="outer-con ">
-									<div class="title ">
-										一号
-									</div>									
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-								<a href="/h/# "><img src="/h/images/13.jpe" /></a>
-							</div>
-
-							<div class="am-u-sm-7 am-u-md-4 text-two">
-								<div class="outer-con ">
-									<div class="title ">
-										二号
-									</div>
-									<div class="sub-title ">
-										¥13.8
-									</div>
-									<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-								</div>
-								<a href="/h/# "><img src="/h/images/15.jpe" /></a>
-							</div>
-
-
-						<div class="am-u-sm-3 am-u-md-2 text-three big">
-							<div class="outer-con ">
-								<div class="title ">
-									三号
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="/h/# "><img src="/h/images/11.jpe" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-2 text-three sug">
-							<div class="outer-con ">
-								<div class="title ">
-									四号
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="/h/# "><img src="/h/images/3.jpe" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-2 text-three ">
-							<div class="outer-con ">
-								<div class="title ">
-									五号
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="/h/# "><img src="/h/images/4.jpe" /></a>
-						</div>
-
-						<div class="am-u-sm-3 am-u-md-2 text-three last big ">
-							<!-- <div class="outer-con ">
-								<div class="title ">
-									六号
-								</div>
-								<div class="sub-title ">
-									¥4.8
-								</div>
-								<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-							</div>
-							<a href="/h/# "><img src="/h/images/5.jpe" /></a> -->
-
-
-							1111
-						</div>
-
 					</div>
-                 <div class="clear "></div>  
-                 </div>
+					<a href="/h/# ">
+						<div class="outer-con ">
+							<div class="title ">
+							开抢啦！
+							</div>
+							<div class="sub-title ">
+								美女大礼包
+							</div>									
+						</div>
+                          <img src="/h/images/2016.png " />								
+					</a>
+					<div class="triangle-topright"></div>						
+				</div>
+				
+					<div class="am-u-sm-7 am-u-md-4 text-two sug">
+						<div class="outer-con ">
+							<div class="title ">
+								一号
+							</div>									
+							<div class="sub-title ">
+								¥13.8
+							</div>
+							<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+						</div>
+						<a href="/h/# "><img src="/h/images/2016.png" /></a>
+					</div>
+
+					<div class="am-u-sm-7 am-u-md-4 text-two">
+						<div class="outer-con ">
+							<div class="title ">
+								二号
+							</div>
+							<div class="sub-title ">
+								¥13.8
+							</div>
+							<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+						</div>
+						<a href="/h/# "><img src="/h/images/15.jpe" /></a>
+					</div>
+
+
+				<div class="am-u-sm-3 am-u-md-2 text-three big">
+					<div class="outer-con ">
+						<div class="title ">
+							三号
+						</div>
+						<div class="sub-title ">
+							¥4.8
+						</div>
+						<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+					</div>
+					<a href="/h/# "><img src="/h/images/11.jpe" /></a>
+				</div>
+
+				<div class="am-u-sm-3 am-u-md-2 text-three sug">
+					<div class="outer-con ">
+						<div class="title ">
+							四号
+						</div>
+						<div class="sub-title ">
+							¥4.8
+						</div>
+						<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+					</div>
+					<a href="/h/# "><img src="/h/images/3.jpe" /></a>
+				</div>
+
+				<div class="am-u-sm-3 am-u-md-2 text-three ">
+					<div class="outer-con ">
+						<div class="title ">
+							五号
+						</div>
+						<div class="sub-title ">
+							¥4.8
+						</div>
+						<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+					</div>
+					<a href="/h/# "><img src="/h/images/4.jpe" /></a>
+				</div>
+
+				<div class="am-u-sm-3 am-u-md-2 text-three last big ">
+					
+						
+						<span class="marqueen-title">面盆儿</span>
+						<div style="overflow:hidden;">
+						
+						@foreach($type as $tk=>$tv)
+						@if($tv['name']==$v1['name'])
+							<p style="text-align:left;">提问者:aaa</p>
+							<p style="text-align:left;">提问时间:{{ $tv['ctime']}}</p>
+
+							<p style="text-align:left;">问题:<a href="javascript:void(0)" onclick="showQuestion({{ $tv['uid'] }})">{{ $tv['content']}}</a></p>
+						@endif					
+						@endforeach
+						
+					 	</div>
+					
+				</div>
+
+			</div>
+         <div class="clear "></div>  
+       </div>
                  
+@endforeach
 
 
+	<script>
+
+	// 显示问题列表的ajax
+         function showQuestion(cateid){
+            $.get('{{url('/home/answer/')}}/'+cateid,{},function(data){
+                //页面层
+                layer.open({
+                    type: 1,
+                    title:"回复列表",
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['620px', '340px'], //宽高
+                    content: data
+                });
+
+            console.log(data)
+            });
+        }
+					
+</script>
 
 
         <div id="f2">

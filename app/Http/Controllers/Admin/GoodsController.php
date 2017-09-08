@@ -31,6 +31,8 @@ class GoodsController extends Controller
         foreach($data as $k=>$v)
         {
             $info =  sad_goods::find($v['id'])->home_user->username;
+            // dd($info);
+
             $data[$k]['uid'] = $info;
         }
         

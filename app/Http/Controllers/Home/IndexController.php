@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+use App\Models\sad_type;
+use App\Models\sad_question;
+use App\Models\sad_answer;
 
 class IndexController extends Controller
 {
@@ -40,8 +43,53 @@ class IndexController extends Controller
      */
     public function index()
     {
+        // 将分类遍历到主页面中
+        $data = sad_type::all();
+        $data2 = [];
+        $data3 = [];
+        $data4 = [];
+       
+        foreach($data as $k=>$v)
+        {
+            // 统计一个字符串在另一个字符串出现次数
+
+            $len = substr_count($v['path'],',');
+            if($v['pid']==0)
+            {
+                $data2[] = $v;
+
+            }
+            
+            foreach($data2 as $kk=>$vv)
+            {
+                // var_dump($v['id']);
+                if($v['pid']==$vv['id'])
+                {
+                    $data3[] = $v;
+                }
+            }
+
+        }
+        //分类结束
+
+        // 将问题遍历到面盆中
+        $type = sad_question::get();
         
-        return view('home.index.index',['data'=>self::typePid(),'data1'=>self::lun()]);
+        // 获取商品列表的值
+        $type = sad_question::join('type','question.tid','=','type.id')->get();
+
+
+
+
+
+
+
+
+
+
+
+        return view('home.index.index',['data'=>self::typePid(),'data1'=>self::lun(),'data2'=>$data2,'data3'=>$data3,'type'=>$type]);
+
     }
 
     /**
@@ -121,4 +169,41 @@ class IndexController extends Controller
             // dd($data);
         return $data1;
     }
+
+     /*
+    *
+    *加载回复的主页面
+    *
+    */
+    public function answer($id)
+    {
+        // $data = sad_question::where('uid',5)->get();
+        // dd($tt);
+        // $id = $request ->only('uid');
+        // dd($id);
+
+        // dd($id);
+        //获取数据库中的数据,遍历到后台表格中
+
+        $data = sad_answer::where('qid',$id)->get();
+
+        return view('home.question.answer',['data'=>$data]);
+
+
+    }
+
+    /*回复用户的评论
+    *
+    *
+    */
+    public function reply($id)
+    {
+        dd($id);
+        //获取用户的数据问题
+        $data = sad_question::find($id);
+        $res = $data ->question;
+           // dd($res);
+        return view('home.question.reply',compact('res'));
+    }
+
 }

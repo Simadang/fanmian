@@ -350,7 +350,15 @@
                             <li><a href="/admin/link/create">添加友情链接</a></li>
                         </ul>
                     </li>
-                    
+
+                    <li>
+                        <a href="/d/#"><i class="icon-bullhorn"></i> 网站公告管理</a>
+                        <ul>
+                            <li><a href="{{url('admin/notice')}}">查看网站公告</a></li>
+                            <li><a href="{{url('admin/notice/create')}}">添加网站公告</a></li>
+                        </ul>
+                    </li>
+                 
                        
                 </ul>
             </div>         
