@@ -1,0 +1,4 @@
+
+<div>
+	{!!$data['content']!!}
+</div>
