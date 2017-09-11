@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         //在登陆的用户id中取出该用户的详细信息
         $user = session('user');
-        //dd($user);
+        // dd($user);
         //获取用户详情表的数据
         $info = sad_userinfo::where('uid',$user['id'])->get();
         // dd($info);

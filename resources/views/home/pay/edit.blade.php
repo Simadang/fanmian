@@ -132,13 +132,30 @@
 								</script>
 								 <input type="button" name="bt" id="bt" value="测试" onclick="getValue()">
 								</fieldset>
-								<small>100字以内写出你的详细地址...</small>
+								<script>
+								// function getValue(){
+								// 	var s1 = $('#province').val();
+								// 	var s2 = $('#city').val();
+								// 	var s3 = $('#area').val();
+								// 	// alert(s1);
+								// 	// alert(s2);
+								// 	// alert(s3);
+								// 	var sum = s1,s2,s3,;
+								// 	// alert(sum);
+								// 	// $('#address').val(sum);
+								// }
+
+								// </script>
+								
+									<!-- <textarea name="address" id="address" cols="20" rows="5"></textarea> -->
+								<!-- <input type="text" name="address" id="address"   /> -->
+								
 							</div>
 						</div>
 
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
-								<input type="submit"value="修改"/>
+								<button class="am-btn am-btn-danger">修改</button>
 								<!-- <a href="{{ url('pay') }}"><button>取消</button></a> -->
 								
 							</div>
@@ -148,7 +165,7 @@
 					
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
-					<a href="{{ url('pay') }}"><button>取消修改</button></a>
+					<a href="{{ url('pay') }}"><button class="am-btn am-btn-danger">取消修改</button></a>
 				</div>
 			</div>
 				</div>

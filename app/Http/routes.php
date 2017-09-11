@@ -131,22 +131,7 @@ Route::group(['middleware'=>'Login'],function(){
 	//轮播图管理的路由
 	Route::resource('admin/slide','Admin\SlideController');
 	Route::post('admin/upload','Admin\SlideController@upload');
-<<<<<<< HEAD
-	//鱼塘
-	Route::controller('/admin/question','Admin\QuestionController');
-	Route::get('/admin/question/answer/{id}','Admin\QuestionController@answer');
-	Route::get('/admin/question/delete/{id}','Admin\QuestionController@delete');
 
-});
-//前台主页面的路由   |   分类显示前台的路由
-Route::resource('/','Home\IndexController');
-//轮播图在前台显示的路由
-Route::get('/lun','Home\IndexController@lun');
-//支付页面的引入
-Route::controller('/pay','Home\PayController');
-//引入个人中心页面
-Route::controller('/user','Home\UserController');
-=======
 	//后台鱼塘
 	Route::controller('/admin/question','Admin\QuestionController');
 	Route::get('/admin/question/answer/{id}','Admin\QuestionController@answer');
@@ -162,11 +147,13 @@ Route::controller('/user','Home\UserController');
 	Route::post('admin/login','Admin\LoginController@dologin');
 	//验证码的路由
 	Route::get('/code','Code\CodeController@index');
+	//引入个人中心页面
+	Route::controller('/user','Home\UserController');
+	//支付页面的引入
+	Route::controller('/pay','Home\PayController');
+	//用户中心的安全设置页面
+	Route::controller('safety','Home\SafetyController');
 
-
-
-
->>>>>>> b3492246aeb21fbfa401a15e1f68966ce19f3daf
 
 
 

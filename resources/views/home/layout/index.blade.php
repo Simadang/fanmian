@@ -89,13 +89,10 @@
 						
 						@foreach($data1 as $key=>$value)
 					
-<<<<<<< HEAD
+
 						<!-- dd($value); -->
-						<li class="banner2"><a><img src="{{ "/uploads".$value['url'] }}" /></a></li>
-=======
-						dd($value);
 						<li class="banner2"><a><img src="{{ $value['url'] }}" /></a></li>
->>>>>>> b3492246aeb21fbfa401a15e1f68966ce19f3daf
+
 						
 						@endforeach
 					</ul>

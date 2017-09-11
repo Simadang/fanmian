@@ -19,12 +19,16 @@ class PayController extends Controller
     public function getIndex()
     {           //上面getIndex()括号内是要有一个$id 的参数的
        //将数据库中的用户的地址管理遍历到页面中(登录用户的id 暂时先写死  目前先给了一个 1)
-        $user = DB::table('useraddress')->where('uid',0)->get();
+            $user = session('user');
+            // dd($user);
+            $id = $user['id'];
+            // dd($id);
+        $user = DB::table('useraddress')->where('uid',$id)->get();
         // dd($data);
-        //获取用户提交的订单的信息,分配到页面
-        $order = DB::table('order')->where('id',1)->get();
-        // dd($order);
-        return view('home.pay.index',compact('user','order'));
+        //获取用户要购买的商品的信息,分配到页面
+        $goods = DB::table('goods')->where('id',1)->get();
+        // dd($goods);
+        return view('home.pay.index',compact('user','goods'));
     }
     /*
     *
@@ -114,6 +118,14 @@ class PayController extends Controller
         //通过id 获取用户要修改的所有数据
         $request = $request ->except('_token');
         // dd($request);
+        //定义一个数组
+        $address = "";
+            $address = '"'.$request['user_province'].','. $request['user_city'].','.$request['user_area'].'"';
+            
+             
+            $request['address'] =  $address;
+             // $request = $request ->input('name','phone','address');
+            // dd($request);
         //验证规则
          //给信息加规则,验证
              $rule = [
@@ -138,11 +150,21 @@ class PayController extends Controller
                 ->withInput();
         } 
         //3.执行修改的动作,并添加到数据库中
-           $res = DB::table('useraddress')->where('id',$id)->update($request);
+           $res = DB::table('useraddress')->where('id',$id)->update(['name'=>$request['name'],'phone'=>$request['phone'],'address'=>$request['address']]);
            if($res){
             return redirect('pay/index');
         }else{
             return back()->with('errors','删除失败');
         }
+    }
+    /*
+    *
+    *成功提交订单的路由
+    *
+    */
+    public function postSuccess(Request $request)
+    {
+        $request = $request ->all();
+        // dd($request);
     }
 }

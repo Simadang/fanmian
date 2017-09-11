@@ -17,14 +17,7 @@
 		<script type="text/javascript" src="/h/js/address.js"></script>
 		<!--城市三级联动-->
 		<script type="javascript" src="/h/js/pcasunzip.js" charset="gb2312"></script>
-		<script type="text/javascript">
-				function getValue(){ 
-				var getpro=document.getElementById("province").value;
-				var getcity=document.getElementById("city").value;
-				var getarea=document.getElementById("area").value;
-				alert(getpro+" "+getcity+" "+getarea);
-				 }
-</script>
+		
 	</head>
 
 	<body>
@@ -34,21 +27,26 @@
 			<ul class="message-l">
 				<div class="topMessage">
 					<div class="menu-hd">
-						<a href="/h/#" target="_top" class="h">亲，请登录</a>
-						<a href="/h/#" target="_top">免费注册</a>
+						@if(session('user'))
+						<a href="javascript:;" target="_top" class="h">欢迎您,{{ session('user')['username'] }}</a>
+						<a href="{{ url('home/login/logout') }}" target="_top">[退出]</a>
+						@else
+						<a href="{{ url('home/login') }}" target="_top" class="h">亲，请登录</a>
+						<a href="{{ url('home/regist') }}" target="_top">免费注册</a>
+						@endif
 					</div>
 				</div>
 			</ul>
 			<ul class="message-r">
 				<div class="topMessage home">
-					<div class="menu-hd"><a href="/h/#" target="_top" class="h">商城首页</a></div>
+					<div class="menu-hd"><a href="{{ url('/') }}" target="_top" class="h">商城首页</a></div>
 				</div>
 				<div class="topMessage my-shangcheng">
-					<div class="menu-hd MyShangcheng"><a href="/h/#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+					<div class="menu-hd MyShangcheng"><a href="{{ url('user') }}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 				</div>
-				<div class="topMessage mini-cart">
+				<!-- <div class="topMessage mini-cart">
 					<div class="menu-hd"><a id="mc-menu-hd" href="/h/#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
-				</div>
+				</div> -->
 				<div class="topMessage favorite">
 					<div class="menu-hd"><a href="/h/#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 			</ul>
@@ -57,9 +55,9 @@
 			<!--悬浮搜索框-->
 
 			<div class="nav white">
-				<div class="logo"><img src="/h/images/logo.png" /></div>
+				<!-- <div class="logo"></div> -->
 				<div class="logoBig">
-					<li><img src="/h/images/logobig.png" /></li>
+					<li><img src="/h/images/logo-search.png" /></li>
 				</div>
 
 				<div class="search-bar pr">
@@ -183,7 +181,7 @@
 								</div>
 							</div>
 							<div class="clear"></div>
-							@foreach($order as $kk=>$vv)
+							@foreach($goods as $kk=>$vv)
 							<tr class="item-list">
 								<div class="bundle  bundle-last">
 
@@ -197,20 +195,23 @@
 													</div>
 													<div class="item-info">
 														<div class="item-basic-info">
-															<a href="/h/#" class="item-title J_MakePoint" data-point="tbcart.8.11">美康粉黛醉美唇膏 持久保湿滋润防水不掉色</a>
+															<a href="/h/#" class="item-title J_MakePoint" data-point="tbcart.8.11">{{ $vv['title'] }}</a>
 														</div>
 													</div>
 												</li>
 												<li class="td td-info">
 													<div class="item-props">
-														<span class="sku-line">颜色：12#川南玛瑙</span>
-														<span class="sku-line">包装：裸装</span>
+														<!-- 商品介绍 -->
+														<span class="sku-line">{{ $vv['intro'] }}</span><br>
+														<!-- 商品成色 -->
+														<span class="sku-line">{{ $vv['condition'] }}</span>
+														
 													</div>
 												</li>
 												<li class="td td-price">
 													<div class="item-price price-promo-promo">
 														<div class="price-content">
-															<em class="J_Price price-now" id="papapa">{{ $vv['cost'] }}</em>
+															<em class="J_Price price-now" id="papapa">{{ $vv['reprice'] }}</em>
 														</div>
 													</div>
 												</li>
@@ -221,7 +222,7 @@
 														<span class="phone-title">购买数量</span>
 								<div class="sl">
 									<input class="min am-btn" name="" type="button" value="-" id="jian" />
-									<input class="text_box" name="" type="text" value="1" id="num" style="width:30px;" />
+									<input class="text_box" name="num" type="text" value="1" id="num"  style="width:30px;" />
 									<input class="add am-btn" name="" type="button"id="jia" value="+" />
 								</div>
 													</div>
@@ -229,7 +230,7 @@
 											</li>
 											<li class="td td-sum">
 												<div class="td-inner">
-													<em tabindex="0" class="J_ItemSum number" id="sum"> {{ $vv['cost'] }}</em>
+													<em tabindex="0" class="J_ItemSum number" id="sum"> {{ $vv['reprice'] }}</em>
 												</div>
 								@endforeach
 												<script src="/d/jquery/jquery-1.8.3.min.js"></script>
@@ -238,12 +239,15 @@
 													
 													$('#jia').click(function(){
 															var s = $('#papapa').html();
+															// alert(s);
 															var n = $('#num').val();
 														// alert(n);
 														// alert(s);
 														 
-																var sum = s*n;
+																var sum = s*(++n);
 																$('#sum').html(sum);
+																$('#Fee').html(sum);
+																$('#xiaomeng').html(sum);
 																// alert(sum);
 													})
 													$('#jian').click(function(){
@@ -252,9 +256,10 @@
 														// alert(n);
 														// alert(s);
 														 
-																var sum = s*n;
+																var sum = s*(--n);
 																$('#sum').html(sum);
 																$('#Fee').html(sum);
+																$('#xiaomeng').html(sum);
 																// alert(sum);
 													})
 
@@ -299,7 +304,9 @@
 							<!--含运费小计 -->
 							<div class="buy-point-discharge ">
 								<p class="price g_price ">
-									合计（含运费） <span>¥</span><em class="pay-sum">244.00</em>
+									合计（含运费） <span>¥</span><em class="pay-sum" id="xiaomeng">
+										<input type="text"name="cost" value="{{ $vv['reprice'] }}" />
+									</em>
 								</p>
 							</div>
 
@@ -307,9 +314,18 @@
 							<div class="order-go clearfix">
 								<div class="pay-confirm clearfix">
 									<div class="box">
+									<form action="{{ url('pay/success') }}"method="post">
+									{{ csrf_field() }}
+									<input type="hidden" name="num" value="{{ $vv['num'] }}" />
+									<!-- <input type="hidden" name="cost" value="{{ $vv['reprice'] }}" /> -->
+									<input type="hidden" name="gid" value="{{ $vv['id'] }}" />
+									<input type="hidden" name="ordertime" value="{{ date('Y-m-d H:i:s',time()) }}" />
 										<div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
 											<span class="price g_price ">
-                                    <span>¥</span> <em class="style-large-bold-red " id="Fee"></em>
+									}
+                                    <span>¥</span> <em class="style-large-bold-red " id="Fee">
+                                    	<input type="text"name="cost" value="{{ $vv['reprice'] }}" />
+                                    </em>
 											</span>
 										</div>
 
@@ -318,15 +334,20 @@
 											<p class="buy-footer-address">
 												<span class="buy-line-title buy-line-title-type">寄送至：</span>
 												<span class="buy--address-detail">
-								  					{{ $v['address'] }}
+								  					
+								  					<input type="text"name="address" value="{{ $v['address'] }}" />
 												</span>
 												</span>
 											</p>
 											<p class="buy-footer-address">
 												<span class="buy-line-title">收货人：</span>
 												<span class="buy-address-detail">   
-                                         <span class="buy-user">{{ $v['name'] }}</span>
-												<span class="buy-phone">{{ $v['phone'] }}</span>
+                                         <span class="buy-user">
+											<input type="text"name="name" value="{{ $v['name'] }}" />
+                                         </span>
+												<span class="buy-phone">
+											<input type="text"name="phone" value="{{ $v['phone'] }}" />
+												</span>
 												</span>
 											</p>
 										</div>
@@ -334,9 +355,11 @@
 
 									<div id="holyshit269" class="submitOrder">
 										<div class="go-btn-wrap">
-											<a id="J_Go" href="" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
+											<!-- <a id="J_Go" href="" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a> -->
+											<button id="J_Go" class="btn-go" tabindex="0" style="margin-left:870px">提交订单</button>
 										</div>
 									</div>
+										</form>
 									<div class="clear"></div>
 								</div>
 							</div>
@@ -425,7 +448,7 @@
 
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
-								<input type="submit"value="添加" style="color:red"/>
+								<button class="am-btn am-btn-danger">添加</button>
 								
 							</div>
 						</div>
