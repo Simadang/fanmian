@@ -12,6 +12,8 @@ class sad_question extends Model
     // 取消时间戳
     public $timestamps = false;
 
+    // 无黑名单
+    public $guarded = [];
 
     // 对商品板块列表一对多
     // 此表为主表2

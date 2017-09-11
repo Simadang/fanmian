@@ -240,13 +240,18 @@ Route::get('/home/answer/{id}','Home\IndexController@answer');
 Route::get('/home/question/reply/{id}','Home\IndexController@reply');
 
 // 前台搜索页面
-Route::resource('/search','Home\searchController');
+Route::resource('/search','Home\SearchController');
+
+// 前台搜索页面商品图片
+Route::get('/home/pic/{id}','Home\SearchController@pic');
 
 
+//前台商品详情路由
+Route::resource('/home/goods','Home\GoodsController');
+Route::resource('/home/order','Home\OrderController');
 
-
-
-
+// 错误 
+Route::get('error','ErrorController@index');
 
 
 

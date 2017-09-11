@@ -19,14 +19,13 @@ class GoodsController extends Controller
      */
     public function index(Request $request)
     {
-        $count = $request -> input('count',3);
+        $count = $request -> input('count',10);
         $search = $request -> input('search','');
         $request = $request -> all();
         
         // 获取商品列表的值
         $data = Sad_goods::where('title','like','%'.$search.'%')->paginate($count);
-
-       
+               
         //将商品列表中的uid替换为卖家姓名
         foreach($data as $k=>$v)
         {

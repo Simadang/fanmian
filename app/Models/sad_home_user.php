@@ -18,4 +18,11 @@ class sad_home_user extends Model
     {
     	return $this->hasMany('App\Models\sad_goods','uid','id');
     }
+
+    // 对评论板块列表一对多
+    // 此表为主表1
+    public function comment()
+    {
+        return $this->hasMany('App\Models\sad_comment','uid','id');
+    }
 }

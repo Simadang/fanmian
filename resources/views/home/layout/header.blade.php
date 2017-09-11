@@ -17,9 +17,10 @@
 		<script src="/h/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 		<script src="/h/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
 
-		<link href="h/css/seastyle.css" rel="stylesheet" type="text/css" />
+		<link href="/h/css/seastyle.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="/h/basic/js/jquery-1.7.min.js"></script>
 		<script type="text/javascript" src="/h/js/script.js"></script>
+
 
 	</head>
 
@@ -31,8 +32,13 @@
 						<ul class="message-l">
 							<div class="topMessage">
 								<div class="menu-hd">
-									<a href="#" target="_top" class="h">亲，请登录</a>
-									<a href="#" target="_top">免费注册</a>
+									@if(session('user'))
+									<a href="javascript:;" target="_top" class="h">欢迎您,{{ session('user')['username'] }}</a>
+									<a href="{{ url('home/login/logout') }}" target="_top">[退出]</a>
+									@else
+									<a href="{{ url('home/login') }}" target="_top" class="h">亲，请登录</a>
+									<a href="{{ url('home/regist') }}" target="_top">免费注册</a>
+									@endif
 								</div>
 							</div>
 						</ul>
@@ -59,9 +65,10 @@
 							</div>
 
 							<div class="search-bar pr">
-								<a name="index_none_header_sysc" href="#"></a>
-								<form>
-									<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+								<a name="index_none_header_sysc" href="/h/#"></a>
+								<form method='get' action='/search'>
+								
+									<input id="searchInput" name="search" type="text" placeholder="搜索商品" autocomplete="off" value="{{$request['search'] or ''}}">
 									<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 								</form>
 							</div>
@@ -77,7 +84,7 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
-								<li class="index"><a href="#">首页</a></li>
+								<li class="index"><a href="{{ url('/') }}">首页</a></li>
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>

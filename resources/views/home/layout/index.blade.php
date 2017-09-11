@@ -62,8 +62,9 @@
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="/h/#"></a>
-						<form>
-							<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+						<form method='get' action='/search'>
+						
+							<input id="searchInput" name="search" type="text" placeholder="搜索商品" autocomplete="off" value="{{$request['search'] or ''}}">
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 						</form>
 					</div>
@@ -82,7 +83,6 @@
 						
 						@foreach($data1 as $key=>$value)
 					
-						dd($value);
 						<li class="banner2"><a><img src="{{ $value['url'] }}" /></a></li>
 						
 						@endforeach
@@ -120,7 +120,7 @@
 											@foreach($data as $k=>$v)
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
-													<h3 class="category-name b-category-name"><a class="ml-22" title="">{{ $v['name'] }}</a></h3>
+													<h3 class="category-name b-category-name"><a class="ml-22" href="/search/{{ $v['id'] }}">{{ $v['name'] }}</a></h3>
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
@@ -132,7 +132,7 @@
 
 																		<dt><span title="">{{ $vv['name'] }}</span></dt>
 																		@foreach($vv['sub'] as $kkk=>$vvv)
-																		<dd><a title="" href="/h/#"><span>{{ $vvv['name'] }}</span></a></dd>
+																		<dd><a title="" href="/search/{{ $vvv['id'] }}"><span>{{ $vvv['name'] }}</span></a></dd>
 																		@endforeach
 																	</dl>
 																	
@@ -311,6 +311,7 @@
 				
 
 @foreach($data2 as $k1=>$v1)
+
             <div id="f1">
 			<!--甜点-->
 			
@@ -320,7 +321,7 @@
 					<h3>翻面,给你更好的一面</h3>
 					
 					<span class="more ">
-            <a href="/h/# ">更多二手<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
+            <a href="/search/{{ $v1['id'] }}">更多二手<i class="am-icon-angle-right" style="padding-left:10px ;" ></i></a>
                 </span>
 				</div>
 			</div>
@@ -335,8 +336,8 @@
 							
 							
 							@if($v3['pid'] == $v1['id'])
-								
-							<a class="outer" href="/h/#"><span class="inner"><b class="text">{{ $v3['name']}}</b></span></a>
+							
+							<a class="outer" href="/search/{{ $v3['id'] }}"><span class="inner"><b class="text">{{ $v3['name']}}</b></span></a>
 							
 
 							
@@ -357,77 +358,82 @@
 					</a>
 					<div class="triangle-topright"></div>						
 				</div>
+
+
+
+
+			@foreach($g as $gk=>$gv)
+
+			
+	
+				@if($gk == $v1['id'])
 				
-					<div class="am-u-sm-7 am-u-md-4 text-two sug">
+				
+				@if(count($gv)>5)
+					<?php
+                       $gv = array_slice($gv,0,5);
+					?>
+				@endif
+					
+
+				
+				@foreach($gv as $gvk=>$gvv)
+				
+				
+				
+
+				<?php
+
+				switch ($gvk)
+				{
+					case 0:
+						echo "<div class='am-u-sm-7 am-u-md-4 text-two sug'>";
+					break;
+					
+					case 1:
+						echo "<div class='am-u-sm-7 am-u-md-4 text-two'>";
+					break;
+
+					case 2:
+						echo "<div class='am-u-sm-3 am-u-md-2 text-three big'>";
+					break;
+
+					case 3:
+						echo "<div class='am-u-sm-3 am-u-md-2 text-three sug'>";
+					break;
+
+					case 4:
+						echo "<div class='am-u-sm-3 am-u-md-2 text-three'>";
+					break;
+
+				}
+
+				?>
+				
+
 						<div class="outer-con ">
 							<div class="title ">
-								一号
+								{{ $gvv['title']}}
 							</div>									
 							<div class="sub-title ">
-								¥13.8
+								<b>价格:￥</b><strong>{{ $gvv['reprice']}}</strong>
 							</div>
-							<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
+							
 						</div>
-						<a href="/h/# "><img src="/h/images/2016.png" /></a>
+						<a href="/home/goods/{{ $gvv['id']}}"><img src="/{{ $gvv['pic'] }}" /></a>
 					</div>
 
-					<div class="am-u-sm-7 am-u-md-4 text-two">
-						<div class="outer-con ">
-							<div class="title ">
-								二号
-							</div>
-							<div class="sub-title ">
-								¥13.8
-							</div>
-							<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-						</div>
-						<a href="/h/# "><img src="/h/images/15.jpe" /></a>
-					</div>
+					
 
 
-				<div class="am-u-sm-3 am-u-md-2 text-three big">
-					<div class="outer-con ">
-						<div class="title ">
-							三号
-						</div>
-						<div class="sub-title ">
-							¥4.8
-						</div>
-						<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-					</div>
-					<a href="/h/# "><img src="/h/images/11.jpe" /></a>
-				</div>
-
-				<div class="am-u-sm-3 am-u-md-2 text-three sug">
-					<div class="outer-con ">
-						<div class="title ">
-							四号
-						</div>
-						<div class="sub-title ">
-							¥4.8
-						</div>
-						<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-					</div>
-					<a href="/h/# "><img src="/h/images/3.jpe" /></a>
-				</div>
-
-				<div class="am-u-sm-3 am-u-md-2 text-three ">
-					<div class="outer-con ">
-						<div class="title ">
-							五号
-						</div>
-						<div class="sub-title ">
-							¥4.8
-						</div>
-						<i class="am-icon-shopping-basket am-icon-md  seprate"></i>
-					</div>
-					<a href="/h/# "><img src="/h/images/4.jpe" /></a>
-				</div>
+				@endforeach
+				@endif
+				@endforeach
 
 				<div class="am-u-sm-3 am-u-md-2 text-three last big ">
 					
 						
-						<span class="marqueen-title">面盆儿</span>
+						<a href="{{url('home/fishpond?tid='.$v1['id'].'&name='.$v1['name'])}}"><span class="marqueen-title">面盆儿</span></a>
 						<div style="overflow:hidden;">
 						
 						@foreach($type as $tk=>$tv)

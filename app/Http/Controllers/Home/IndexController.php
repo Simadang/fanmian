@@ -10,6 +10,7 @@ use DB;
 use App\Models\sad_type;
 use App\Models\sad_question;
 use App\Models\sad_answer;
+use App\Models\sad_goods;
 
 class IndexController extends Controller
 {
@@ -43,6 +44,7 @@ class IndexController extends Controller
      */
     public function index()
     {
+
         // 将分类遍历到主页面中
         $data = sad_type::all();
         $data2 = [];
@@ -58,37 +60,71 @@ class IndexController extends Controller
             {
                 $data2[] = $v;
 
+            }else{
+
+                $data3[] = $v;
+
             }
             
-            foreach($data2 as $kk=>$vv)
-            {
-                // var_dump($v['id']);
-                if($v['pid']==$vv['id'])
-                {
-                    $data3[] = $v;
-                }
-            }
 
         }
         //分类结束
 
         // 将问题遍历到面盆中
-        $type = sad_question::get();
-        
-        // 获取商品列表的值
         $type = sad_question::join('type','question.tid','=','type.id')->get();
 
+        
+        // dd($data2);
+
+        // 遍历商品信息
+        $goods = DB::table('goods')->orderBy('id','desc')->get();
+        
+        // $goods = DB::table('goods')->orderBy('id','desc');
+        
+        foreach($goods as $k=>$v)
+        {
+            
+            $goods1 = DB::table('type')->where('id',$v['tid'])->select('path')->get();
+            // dump($goods1);
+             // dump($v);
+
+            foreach($goods1 as $kk=>$vv)
+            {
+                // dump($vv->path);
+                $s = explode(',',$vv['path']);
+                // dump($s);
+                $ss = DB::table('type')->where('id',$s[1])->select('name')->get();
+                // dump($ss[0]['name']);
+                // dump($v);
+                $goods[$k]['name']=$ss[0]['name'];
+                // $v['tid']=$s[1];
+                // dump($v);
+            }
+            
+           
+        }
+
+        // dd($goods);
+        // 将商品信息放入单独数组
+        $g = [];
+        foreach($data2 as $k=>$v)
+        {
+           // dump($v);
+            foreach($goods as $gk=>$gv)
+            {
+                // dump($gv);
+                if($v['name']==$gv['name'])
+                {
+                    $g[$v['id']][]=$gv;
+
+                }
+                
+            }
+        }
+       
 
 
-
-
-
-
-
-
-
-
-        return view('home.index.index',['data'=>self::typePid(),'data1'=>self::lun(),'data2'=>$data2,'data3'=>$data3,'type'=>$type]);
+        return view('home.index.index',['data'=>self::typePid(),'data1'=>self::lun(),'data2'=>$data2,'data3'=>$data3,'type'=>$type,'goods'=>$goods,'g'=>$g]);
 
     }
 

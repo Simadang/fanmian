@@ -25,4 +25,11 @@ class sad_goods extends Model
     	return $this->belongsTo('App\Models\sad_type','tid','id');
     }
 
+    // 对评论板块列表一对多
+    // 此表为主表1
+    public function comment1()
+    {
+        return $this->hasMany('App\Models\sad_comment','gid','id');
+    }
+
 }
