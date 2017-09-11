@@ -15,6 +15,11 @@
 		<link href="/h/css/personal.css" rel="stylesheet" type="text/css">
 		<link href="/h/css/stepstyle.css" rel="stylesheet" type="text/css">
 
+		<link href="/h/css/infstyle.css" rel="stylesheet" type="text/css">
+		<link href="/h/css/systyle.css" rel="stylesheet" type="text/css">
+
+
+
 		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
 
@@ -67,14 +72,16 @@
 			<aside class="menu">
 				<ul>
 					<li class="person">
-						<a href="/h/index.html">个人中心</a>
+
+						<a href="{{ url('user/center') }}">个人中心</a>
 					</li>
 					<li class="person">
-						<a href="/h/#">个人资料</a>
+						<a href="javascript:;">个人资料</a>
 						<ul>
-							<li> <a href="/h/information.html">个人信息</a></li>
-							<li> <a href="/h/safety.html">安全设置</a></li>
-							<li> <a href="/h/address.html">收货地址</a></li>
+							<li> <a href="{{ url('user/detail') }}">个人信息</a></li>
+
+							<li> <a href="{{ url('/safety/index') }}">安全设置</a></li>
+							<li> <a href="{{ url('/address') }}">收货地址</a></li>
 						</ul>
 					</li>
 					<li class="person">

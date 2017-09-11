@@ -13,6 +13,8 @@
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/d/plugins/colorpicker/colorpicker.css" media="screen">
 
+
+
 <link rel="stylesheet" type="text/css" href="/d/custom-plugins/wizard/wizard.css" media="screen">
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="/d/bootstrap/css/bootstrap.min.css" media="screen">
@@ -33,7 +35,9 @@
 <!-- Theme Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
+
 <link rel="stylesheet" type="text/css" href="/d/css/page_page.css">
+
 
 
 <title>{{ Config::get('app.title') }}</title>
@@ -267,6 +271,7 @@
                     </li>
                 </ul>
             </div> -->
+
             
             <!-- Main Navigation -->
             <div id="mws-navigation">
@@ -282,6 +287,7 @@
                         </ul>
                     </li>
                     <li>
+
                         <a href="/d/#"><i class="icon-users"></i> 角色列表</a>
                         <ul>
                             <li><a href="/admin/role">角色详情</a></li>
@@ -306,16 +312,19 @@
                     </li>
                     <li>
                         <a href="/d/#"><i class="icon-chart-alt"></i> 分类详情</a>
+
                         <ul>
                             <li><a href="{{ url('admin/type/create') }}">分类添加</a></li>
                             <li><a href="{{ url('admin/type/index') }}">分类列表</a></li>
                         </ul>
                     </li>
                     <li>
+
                         <a href="/admin/order"><i class="icon-list-2"></i> 订单详情</a>
                        <!--  <ul>
                             <li><a href="">暂时写死</a></li>
                         </ul> -->
+
                     </li>
                     <li>
                         <a href="{{ url('admin/question/index') }}"><i class="icon-network"></i> 鱼塘管理</a>
@@ -334,6 +343,7 @@
                         <a href="/d/#"><i class="icon-cog-3"></i> 广告管理</a>
                         <ul>
                             <li><a href="">广告管理</a></li>
+
                         </ul>
                     </li>
                     <li>
@@ -360,6 +370,7 @@
                     </li>
                  
                        
+
                 </ul>
             </div>         
         </div>
@@ -401,11 +412,13 @@
     <script src="/d/js/libs/jquery.placeholder.min.js"></script>
     <script src="/d/custom-plugins/fileinput.js"></script>
     <script type="text/javascript" src="{{asset('d/layer/layer.js')}}"></script>
+
     <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.all.min.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="/d/jquery/jquery-1.8.3.min.js"></script>
 
 
     <!-- jQuery-UI Dependent Scripts -->

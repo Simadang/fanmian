@@ -29,6 +29,7 @@ class GoodsController extends Controller
         //将商品列表中的uid替换为卖家姓名
         foreach($data as $k=>$v)
         {
+
             $info =  sad_goods::find($v['id'])->home_user->username;
             // dd($info);
 
@@ -39,8 +40,8 @@ class GoodsController extends Controller
         foreach($data as $k=>$v)
         {
             
-            $info =  sad_goods::find($v['id'])->type->name;
-            $data[$k]['tid'] = $info;
+            // $info =  Sad_goods::find($v['id'])->sad_type->name;
+            // $data[$k]['tid'] = $info;
 
             //将商品列表中的condition值更改输出
             $c = '';
@@ -52,7 +53,7 @@ class GoodsController extends Controller
                 
                     $c = '九成新';
                     break;
-                case '3':
+                case '2':
                     $c = '八成新';
                     break;
                 case '3':

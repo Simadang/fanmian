@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 //刘红英 19~119行 111
@@ -131,6 +131,7 @@ Route::group(['middleware'=>'Login'],function(){
 	//轮播图管理的路由
 	Route::resource('admin/slide','Admin\SlideController');
 	Route::post('admin/upload','Admin\SlideController@upload');
+
 	//后台鱼塘
 	Route::controller('/admin/question','Admin\QuestionController');
 	Route::get('/admin/question/answer/{id}','Admin\QuestionController@answer');
@@ -146,9 +147,12 @@ Route::group(['middleware'=>'Login'],function(){
 	Route::post('admin/login','Admin\LoginController@dologin');
 	//验证码的路由
 	Route::get('/code','Code\CodeController@index');
-
-
-
+	//引入个人中心页面
+	Route::controller('/user','Home\UserController');
+	//支付页面的引入
+	Route::controller('/pay','Home\PayController');
+	//用户中心的安全设置页面
+	Route::controller('safety','Home\SafetyController');
 
 
 
@@ -327,6 +331,7 @@ Route::get('error','ErrorController@index');
 
 
 
+
 //李韶凡319~419
 // 后台友情链接路由
 Route::resource('/admin/link','Admin\LinkController');
@@ -334,6 +339,7 @@ Route::resource('/admin/link','Admin\LinkController');
 Route::resource('/admin/goods','Admin\GoodsController');
 // 后台订单页面路由
 Route::resource('/admin/order','Admin\OrderController');
+
 
 
 

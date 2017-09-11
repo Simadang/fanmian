@@ -113,7 +113,7 @@
     </div>
 
 <script>
-    // 通过弹窗进行友情链接的删除
+    // 通过弹窗进行商品链接的删除
       function delgoods(goodsid){
 
             layer.confirm('是否确认删除？', {

@@ -80,7 +80,9 @@ class OrderController extends Controller
 
         
             $str.= "<tr>
+
                     <td class='tc''>{$b['uid']}</td>
+
                     <td class='tc'>{$b['name']}</td>
                     <td class='tc'>{$b['address']}</td>
                     <td class='tc'>{$b['tel']}</td>
