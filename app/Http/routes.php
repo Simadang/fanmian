@@ -105,17 +105,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 //孙林晋 119~219
 
 //用户登录后的路由
@@ -153,8 +142,8 @@ Route::group(['middleware'=>'Login'],function(){
 	Route::controller('/pay','Home\PayController');
 	//用户中心的安全设置页面
 	Route::controller('safety','Home\SafetyController');
-
-
+	//订单管理的路由
+	Route::controller('/order','Home\OrderController');
 
 
 

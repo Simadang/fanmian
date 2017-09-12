@@ -17,7 +17,7 @@
 
 		<link href="/h/css/infstyle.css" rel="stylesheet" type="text/css">
 		<link href="/h/css/systyle.css" rel="stylesheet" type="text/css">
-
+		<link href="/h/css/orstyle.css" rel="stylesheet" type="text/css">
 
 
 		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
@@ -87,7 +87,7 @@
 					<li class="person">
 						<a href="/h/#">我的交易</a>
 						<ul>
-							<li><a href="/h/order.html">订单管理</a></li>
+							<li><a href="{{ url('order/index') }}">订单管理</a></li>
 							<li> <a href="/h/change.html">退款售后</a></li>
 						</ul>
 					</li>

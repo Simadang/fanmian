@@ -449,6 +449,7 @@
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
 								<button class="am-btn am-btn-danger">添加</button>
+								<a href="{{ url('pay/index') }}"><button class="am-btn am-btn-danger">取消添加</button></a>
 								
 							</div>
 						</div>

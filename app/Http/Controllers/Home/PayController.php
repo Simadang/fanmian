@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\sad_order;;
 
 class PayController extends Controller
 {
@@ -26,7 +27,15 @@ class PayController extends Controller
         $user = DB::table('useraddress')->where('uid',$id)->get();
         // dd($data);
         //获取用户要购买的商品的信息,分配到页面
-        $goods = DB::table('goods')->where('id',1)->get();
+        $code = $_GET['code'];
+        // dd($code);
+         //通过订单号查询该订单的所有信息
+        $order = sad_order::where('code',$code)->get();
+        // dd($order);
+        foreach($order as $key=> $value){
+                $goods = DB::table('goods')->where('id',$value['gid'])->get();
+        }
+        
         // dd($goods);
         return view('home.pay.index',compact('user','goods'));
     }
@@ -65,14 +74,21 @@ class PayController extends Controller
                 ->withInput();
         }    
 
-
+            //获取该用户的信息,把地址添加到指定用户的信息下
+            $user = session('user');
+            // dd($user);
+            //获取该用户的id,添加地址时,该用户的地址表的uid应该等于该用户的id
+            $id = $user['id'];
+            // dd($id);
             //把数据添加到数据库中
-            $res = DB::table('useraddress')->insert($data);
-            if($res){
-                return redirect('pay/index');
-            }else{
-                return back()->with('errors','添加失败');
-            }
+            // $address = new sad_useraddress;
+            // $res = $address ->find($id);
+            // dd($res);
+            // if($res){
+            //     return redirect('pay/index');
+            // }else{
+            //     return back()->with('errors','添加失败');
+            // }
 
     }
     /*
@@ -150,7 +166,7 @@ class PayController extends Controller
                 ->withInput();
         } 
         //3.执行修改的动作,并添加到数据库中
-           $res = DB::table('useraddress')->where('id',$id)->update(['name'=>$request['name'],'phone'=>$request['phone'],'address'=>$request['address']]);
+           $res = DB::table('useraddress')->where('uid',$id)->update(['name'=>$request['name'],'phone'=>$request['phone'],'address'=>$request['address']]);
            if($res){
             return redirect('pay/index');
         }else{
