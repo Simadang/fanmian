@@ -17,11 +17,13 @@
 
 		<link href="/h/css/infstyle.css" rel="stylesheet" type="text/css">
 		<link href="/h/css/systyle.css" rel="stylesheet" type="text/css">
-
-
+		<link href="/h/css/addstyle.css" rel="stylesheet" type="text/css">
+		<link href="/h/css/orstyle.css" rel="stylesheet" type="text/css">
 
 		<script src="/h/AmazeUI-2.4.2/assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="/h/AmazeUI-2.4.2/assets/js/amazeui.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/h/js/address.js"></script>
+		<script type="text/javascript" src="{{asset('d/layer/layer.js')}}"></script>
 
 	</head>
 
@@ -85,14 +87,14 @@
 						</ul>
 					</li>
 					<li class="person">
-						<a href="/h/#">我的交易</a>
+						<a href="javascript:;">我的交易</a>
 						<ul>
-							<li><a href="/h/order.html">订单管理</a></li>
+							<li><a href="{{url('/order')}}">订单管理</a></li>
 							<li> <a href="/h/change.html">退款售后</a></li>
 						</ul>
 					</li>
 					<li class="person">
-						<a href="/h/#">我的资产</a>
+						<a href="javascript:;">我的资产</a>
 						<ul>
 							<li> <a href="/h/coupon.html">优惠券 </a></li>
 							<li> <a href="/h/bonus.html">红包</a></li>
@@ -101,12 +103,10 @@
 					</li>
 
 					<li class="person">
-						<a href="/h/#">我的小窝</a>
+						<a>我的小窝</a>
 						<ul>
-							<li> <a href="/h/collection.html">收藏</a></li>
-							<li> <a href="/h/foot.html">足迹</a></li>
-							<li> <a href="/h/comment.html">评价</a></li>
-							<li> <a href="/h/news.html">消息</a></li>
+							<li> <a href="/h/collection.html">我的收藏</a></li>
+							<li> <a href="/pay/sell">我的发布</a></li>
 						</ul>
 					</li>
 

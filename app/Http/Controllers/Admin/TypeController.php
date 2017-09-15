@@ -59,6 +59,12 @@ class TypeController extends Controller
         $temp = $request -> except('_token');
         $pid = $temp['pid'];
 
+
+        if(empty($temp['name'])){
+              return back()->with('error','不能提交空数据');  
+        }
+
+
         if($pid == '--请选择--'){
             // 顶级分类
             $temp['path'] = 0;

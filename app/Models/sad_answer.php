@@ -17,5 +17,18 @@ class sad_answer extends Model
     {
     	return $this->belongsTo('App\Models\sad_question','uid','id');
     }
+
+    /**
+     * 对用户板块列表 一对多
+     * 副表
+     */
+    public function huifu()
+    {
+        return $this->belongsTo('App\Models\sad_home_user','uid','id');
+    }
+
+
+    //无黑名单
+    public $guarded = [];
 }
 

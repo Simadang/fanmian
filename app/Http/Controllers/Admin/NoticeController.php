@@ -21,7 +21,7 @@ class NoticeController extends Controller
         $keyword = $request->input('keyword','');
         
         //获取所有公告
-        $data = DB::table('notice')->where('title','like','%'.$keyword.'%')->orderBy('id','desc')->paginate(2);
+        $data = DB::table('notice')->where('title','like','%'.$keyword.'%')->orderBy('id','desc')->paginate(5);
 
         return view('admin.notice.index',['data'=>$data,'keyword'=>$keyword]);
     }

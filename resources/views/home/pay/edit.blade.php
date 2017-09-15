@@ -15,16 +15,7 @@
 		<link href="/h/css/jsstyle.css" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript" src="/h/js/address.js"></script>
-			<!--城市三级联动-->
-		<script src="/h/js/pcasunzip.js" charset="gb2312"></script>
-		<script type="text/javascript">
-				function getValue(){ 
-				var getpro=document.getElementById("province").value;
-				var getcity=document.getElementById("city").value;
-				var getarea=document.getElementById("area").value;
-				alert(getpro+" "+getcity+" "+getarea);
-				 }
-</script>
+
 
 	</head>
 
@@ -94,7 +85,7 @@
                     </ul>
                 </div>
             @endif
-     		 {{--<p style="color:red">用户名错误</p>--}}
+     		 
 					<form class="am-form am-form-horizontal" method="post" action="{{ url('pay/update/'.$res['id']) }}">
 									{{ csrf_field() }}
 						<div class="am-form-group ">
@@ -112,62 +103,31 @@
 						</div>
 
 						<div class="am-form-group">
-							
-							<div class="am-form-content address">
+							<label for="user-intro" class="am-form-label">详细地址</label>
+							<div class="am-form-content">
+								<textarea name="address" rows="3" id="user-intro" placeholder="输入详细地址" >{{$res['address']}}</textarea>
 								
 							</div>
 						</div>
 						
-						<div class="am-form-group">
-							<label for="user-intro" class="am-form-label">详细地址</label>
-							<div class="am-form-content" style="float:left">
-								<fieldset style="padding:5px;">
-								<legend>省市地区联动</legend>
-								出　　 生 　地：<select name="user.province" id="province"></select>
-												<select name="user.city" id="city"></select>
-												<select name="user.area" id="area"></select><br>
-												<script language="javascript" defer>
-								new PCAS("user.province","user.city","user.area","山东省","济南市","济南市");
-
-								</script>
-								 <input type="button" name="bt" id="bt" value="测试" onclick="getValue()">
-								</fieldset>
-								<script>
-								// function getValue(){
-								// 	var s1 = $('#province').val();
-								// 	var s2 = $('#city').val();
-								// 	var s3 = $('#area').val();
-								// 	// alert(s1);
-								// 	// alert(s2);
-								// 	// alert(s3);
-								// 	var sum = s1,s2,s3,;
-								// 	// alert(sum);
-								// 	// $('#address').val(sum);
-								// }
-
-								// </script>
-								
-									<!-- <textarea name="address" id="address" cols="20" rows="5"></textarea> -->
-								<!-- <input type="text" name="address" id="address"   /> -->
-								
-							</div>
-						</div>
+						
 
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
 								<button class="am-btn am-btn-danger">修改</button>
-								<!-- <a href="{{ url('pay') }}"><button>取消</button></a> -->
 								
 							</div>
+							
 						</div>
-						<!-- <a href="{{ url('pay') }}"><button>取消修改</button></a> -->
+						
 					</form>
-					
-						<div class="am-form-group theme-poptit">
-							<div class="am-u-sm-9 am-u-sm-push-3">
-					<a href="{{ url('pay') }}"><button class="am-btn am-btn-danger">取消修改</button></a>
-				</div>
-			</div>
+					<div>
+						<div class="am-u-sm-9 am-u-sm-push-3">
+							<a href="{{ url('pay') }}"><button class="am-btn am-btn-danger">取消</button></a>
+						</div>
+					</div>
+
+						
 				</div>
 
 			</div>

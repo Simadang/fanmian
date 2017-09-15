@@ -31,7 +31,6 @@
 
 		<link href="/h/css/jsstyle.css" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript" src="/h/js/address.js"></script>
 
 	</head>
 

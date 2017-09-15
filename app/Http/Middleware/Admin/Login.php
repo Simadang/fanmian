@@ -16,7 +16,7 @@ class Login
     public function handle($request, Closure $next)
     {
         //判断用户是否登录
-        if(!session('user')){
+        if(!session('adminuser')){
             return redirect('admin/login');
         }
 

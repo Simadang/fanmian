@@ -340,11 +340,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/d/#"><i class="icon-cog-3"></i> 广告管理</a>
-                        <ul>
-                            <li><a href="">广告管理</a></li>
-
-                        </ul>
+                        <a href="/admin/ad"><i class="icon-cog-3"></i> 广告管理</a>
                     </li>
                     <li>
                         <a href="/d/#"><i class="icon-television"></i>轮播图管理</a>

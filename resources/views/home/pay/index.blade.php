@@ -54,20 +54,23 @@
 
 			<!--悬浮搜索框-->
 
-			<div class="nav white">
-				<!-- <div class="logo"></div> -->
-				<div class="logoBig">
-					<li><img src="/h/images/logo-search.png" /></li>
-				</div>
+			 <div class="nav white">
 
-				<div class="search-bar pr">
-					<a name="index_none_header_sysc" href="/h/#"></a>
-					<form>
-						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-						<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-					</form>
-				</div>
-			</div>
+                    <div class="logo"><img src="/h/images/logo-search.png" /></div>
+                    <div class="logoBig">
+                        <li><img src="/h/images/logo-search.png" /></li>
+
+                    </div>
+
+                    <div class="search-bar pr">
+                        <a name="index_none_header_sysc" href="/h/#"></a>
+                        <form method='get' action='/search'>
+                        
+                            <input id="searchInput" name="search" type="text" placeholder="搜索商品" autocomplete="off" value="{{$request['search'] or ''}}">
+                            <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        </form>
+                    </div>
+                </div>
 
 			<div class="clear"></div>
 			<div class="concent">
@@ -83,8 +86,14 @@
 							<div class="per-border"></div>
 
 
-								@foreach($user as $k=>$v)
+							@foreach($user as $k=>$v)
+
+							@if($v['status']==0)
 							<li class="user-addresslist defaultAddr">
+							@else
+							<li class="user-addresslist">
+							@endif
+
 
 								<div class="address-left">
 									<div class="user DefaultAddr">
@@ -103,7 +112,11 @@
 
 										</span>
 									</div>
-									<ins class="deftip">默认地址</ins>
+
+									@if($v['status']==0)
+										<ins class="deftip">默认地址</ins>
+									@endif
+
 								</div>
 								<div class="address-right">
 									<a href="/h/person/address.html">
@@ -112,7 +125,7 @@
 								<div class="clear"></div>
 
 								<div class="new-addr-btn">
-									<a href="{{ url('pay/status') }}" class="hidden">{{ $v['status']==0 ? '设为默认':'' }}</a>
+									<a href="{{ url('pay/status') }}" class="hidden"></a>
 									<span class="new-addr-bar hidden">|</span>
 									<a href="{{ url('pay/edit/'.$v['id']) }}">编辑</a>
 									<span class="new-addr-bar">|</span>
@@ -121,7 +134,7 @@
 
 							</li>
 							<div class="per-border"></div>
-								@endforeach
+							@endforeach
 
 
 
@@ -131,17 +144,9 @@
 
 						<div class="clear"></div>
 					</div>
-					<!--物流 -->
-					<div class="logistics">
-						<h3>选择物流方式</h3>
-						<ul class="op_express_delivery_hot">
-							<li data-value="yuantong" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -468px"></i>圆通<span></span></li>
-							<li data-value="shentong" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -1008px"></i>申通<span></span></li>
-							<li data-value="yunda" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -576px"></i>韵达<span></span></li>
-							<li data-value="zhongtong" class="OP_LOG_BTN op_express_delivery_hot_last "><i class="c-gap-right" style="background-position:0px -324px"></i>中通<span></span></li>
-							<li data-value="shunfeng" class="OP_LOG_BTN  op_express_delivery_hot_bottom"><i class="c-gap-right" style="background-position:0px -180px"></i>顺丰<span></span></li>
-						</ul>
-					</div>
+				
+
+
 					<div class="clear"></div>
 
 					<!--支付方式-->
@@ -191,7 +196,7 @@
 												<li class="td td-item">
 													<div class="item-pic">
 														<a href="/h/#" class="J_MakePoint">
-															<img src="/h/images/kouhong.jpg_80x80.jpg" class="itempic J_ItemImg"></a>
+															<img src="{{ $vv['pic'] }}" class="itempic J_ItemImg"></a>
 													</div>
 													<div class="item-info">
 														<div class="item-basic-info">
@@ -243,25 +248,48 @@
 															var n = $('#num').val();
 														// alert(n);
 														// alert(s);
-														 
-																var sum = s*(++n);
+														 		
+														 		if(n>={{$goods[0]['num']}}){
+
+														 			n = {{$goods[0]['num']}};
+														 		}else{
+
+														 			var sum = s*(++n);
+														 		}
+
+
+																// var sum = s*(++n);
 																$('#sum').html(sum);
-																$('#Fee').html(sum);
-																$('#xiaomeng').html(sum);
+																$('#Fee').val(sum);
+																
 																// alert(sum);
 													})
 													$('#jian').click(function(){
 															var s = $('#papapa').html();
+
 															var n = $('#num').val();
 														// alert(n);
 														// alert(s);
-														 
-																var sum = s*(--n);
+
+																
+																if(n<=0){
+
+														 			n = 0;
+														 		}else{
+
+														 			var sum = s*(--n);
+														 		}
+
+														 		
+
 																$('#sum').html(sum);
-																$('#Fee').html(sum);
-																$('#xiaomeng').html(sum);
+																$('#Fee').val(sum);
+																
+
 																// alert(sum);
 													})
+
+
 
 												</script>
 
@@ -304,8 +332,9 @@
 							<!--含运费小计 -->
 							<div class="buy-point-discharge ">
 								<p class="price g_price ">
-									合计（含运费） <span>¥</span><em class="pay-sum" id="xiaomeng">
-										<input type="text"name="cost" value="{{ $vv['reprice'] }}" />
+									合计（含运费） <span></span>
+									<em class="pay-sum" id="xiaomeng">
+										
 									</em>
 								</p>
 							</div>
@@ -322,35 +351,14 @@
 									<input type="hidden" name="ordertime" value="{{ date('Y-m-d H:i:s',time()) }}" />
 										<div tabindex="0" id="holyshit267" class="realPay"><em class="t">实付款：</em>
 											<span class="price g_price ">
-									}
-                                    <span>¥</span> <em class="style-large-bold-red " id="Fee">
-                                    	<input type="text"name="cost" value="{{ $vv['reprice'] }}" />
+									
+                                    <span>¥</span> <em class="pay-sum" >
+                                    	<input type="text" id="Fee" name="cost" value="{{ $vv['reprice'] }}" readonly />
                                     </em>
 											</span>
 										</div>
 
-										<div id="holyshit268" class="pay-address">
-
-											<p class="buy-footer-address">
-												<span class="buy-line-title buy-line-title-type">寄送至：</span>
-												<span class="buy--address-detail">
-								  					
-								  					<input type="text"name="address" value="{{ $v['address'] }}" />
-												</span>
-												</span>
-											</p>
-											<p class="buy-footer-address">
-												<span class="buy-line-title">收货人：</span>
-												<span class="buy-address-detail">   
-                                         <span class="buy-user">
-											<input type="text"name="name" value="{{ $v['name'] }}" />
-                                         </span>
-												<span class="buy-phone">
-											<input type="text"name="phone" value="{{ $v['phone'] }}" />
-												</span>
-												</span>
-											</p>
-										</div>
+									
 									</div>
 
 									<div id="holyshit269" class="submitOrder">
@@ -449,7 +457,7 @@
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
 								<button class="am-btn am-btn-danger">添加</button>
-								
+								<a href="{{ url('pay/index') }}"><button class="am-btn am-btn-danger">取消添加</button></a>
 							</div>
 						</div>
 					</form>

@@ -11,6 +11,9 @@ use App\Models\sad_type;
 use App\Models\sad_question;
 use App\Models\sad_answer;
 use App\Models\sad_goods;
+use App\Models\sad_notice;
+use App\Models\sad_ad;
+use App\Models\sad_link;
 
 class IndexController extends Controller
 {
@@ -122,9 +125,27 @@ class IndexController extends Controller
             }
         }
        
+        // 获取前台公告内容
+        $n = DB::table('notice')->orderBy('id','desc')->get();
+        // dd($n);
+        foreach($n as $k=>$v)
+        {
+            if($v['state']==1){
+                
+                $notice[] = $v;
 
+            }
+        }
+        
+        // dd($notice);
 
-        return view('home.index.index',['data'=>self::typePid(),'data1'=>self::lun(),'data2'=>$data2,'data3'=>$data3,'type'=>$type,'goods'=>$goods,'g'=>$g]);
+        // 获取前台广告
+        $ad = sad_ad::all();
+        // 前台友情链接
+        $link = sad_link::all();
+        
+
+        return view('home.index.index',['data'=>self::typePid(),'data1'=>self::lun(),'data2'=>$data2,'data3'=>$data3,'type'=>$type,'goods'=>$goods,'g'=>$g,'notice'=>$notice,'ad'=>$ad,'link'=>$link]);
 
     }
 

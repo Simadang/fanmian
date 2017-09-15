@@ -1,17 +1,101 @@
-@extends('home.layout.header')
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-@section('content')
+		<title>搜索页面</title>
 
+		<link href="/h/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+		<link href="/h/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
+
+		<link href="/h/basic/css/demo.css" rel="stylesheet" type="text/css" />
+
+		<link href="/h/css/seastyle.css" rel="stylesheet" type="text/css" />
+
+		<script type="text/javascript" src="/h/basic/js/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="/h/js/script.js"></script>
+	</head>
+
+	<body>
+
+		<!--顶部导航条 -->
+		<div class="am-container header">
+			<ul class="message-l">
+				 <div class="topMessage">
+                        <div class="menu-hd">
+                            @if(session('user'))
+                            <a href="javascript:;" target="_top" class="h">欢迎您,{{ session('user')['username'] }}</a>
+                            <a href="{{ url('home/login/logout') }}" target="_top">[退出]</a>
+                            @else
+                            <a href="{{ url('home/login') }}" target="_top" class="h">亲，请登录</a>
+                            <a href="{{ url('home/regist') }}" target="_top">免费注册</a>
+                            @endif
+                        </div>
+                    </div>
+			</ul>
+			<ul class="message-r">
+				<div class="topMessage home">
+                        <div class="menu-hd"><a href="{{ url('/') }}" target="_top" class="h">商城首页</a></div>
+                    </div>
+                    <div class="topMessage my-shangcheng">
+
+                        <div class="menu-hd MyShangcheng"><a href="{{ url('/user/center') }}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+
+                    </div>
+                    <div class="topMessage mini-cart">
+                        
+                    </div>
+                    <div class="topMessage favorite">
+			</ul>
+			</div>
+
+			<!--悬浮搜索框-->
+
+			 <div class="nav white">
+
+                    <div class="logo"><img src="/h/images/logo-search.png" /></div>
+                    <div class="logoBig">
+                        <li><img src="/h/images/logo-search.png" /></li>
+
+                    </div>
+
+                    <div class="search-bar pr">
+                        <a name="index_none_header_sysc" href="/h/#"></a>
+                        <form method='get' action='/search'>
+                        
+                            <input id="searchInput" name="search" type="text" placeholder="搜索商品" autocomplete="off" value="{{$request['search'] or ''}}">
+                            <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                        </form>
+                    </div>
+                </div>
+
+			<div class="clear"></div>
+			<b class="line"></b>
+           <div class="search">
+			<div class="search-list">
+			<div class="nav-table">
+					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   <div class="nav-cont">
+							<ul>
+                                <li class="index"><a href="{{ url('/') }}">首页</a></li>
+                                <li class="qc"><a href="/search/5">二手手机</a></li>
+                                <li class="qc"><a href="/search/5">二手火箭</a></li>
+                                <li class="qc"><a href="/home/goods/create">发布闲置</a></li>
+                                <li class="qc last"><a href="/h/#">我的闲置</a></li>
+                            </ul>
+						    
+						</div>
+			</div>
+			
+				
 					<div class="am-g am-g-fixed">
 						<div class="am-u-sm-12 am-u-md-12">
 	                  	<div class="theme-popover">														
 
 							<ul class="select">
-								<p class="title font-normal">
-									<span class="fl">松子</span>
-									<span class="total fl">搜索到<strong class="num">997</strong>件相关商品</span>
-								</p>
+								
 								<div class="clear"></div>
 								<li class="select-result">
 									<dl>
@@ -207,4 +291,3 @@
 	</body>
 
 </html>
-@endsection

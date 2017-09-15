@@ -82,7 +82,7 @@ class LoginController extends Controller
             return back()->with('errors','验证码不正确');
         }
 //        如果登录成功，将用户信息保存如session中，表示用户已经登录
-        session(['user'=>$user]);
+        session(['adminuser'=>$user]);
        // Session::put('user',$user);
 //      4 如果正确跳转到后台首页 ，如果不正确返回
         return redirect('admin/index');

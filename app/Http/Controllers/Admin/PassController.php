@@ -60,7 +60,7 @@ class PassController extends Controller
         }
          // 3 修改密码
 
-       $user =  sad_admin_user::find(session('user')->id);
+       $user =  sad_admin_user::find(session('adminuser')->id);
         $user->password = Hash::make($request['password']);
        $re =  $user->save();
        if($re){

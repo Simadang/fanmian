@@ -25,7 +25,7 @@ class OrderController extends Controller
         $request = $request -> all();
 
         // 获取订单列表详情
-        $data = sad_order::where('temp','like','%'.$search.'%')->paginate($count);
+        $data = sad_order::where('name','like','%'.$search.'%')->paginate($count);
 
 
 

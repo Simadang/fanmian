@@ -45,14 +45,14 @@
 					</div>
 					<div class="topMessage my-shangcheng">
 
-						<div class="menu-hd MyShangcheng"><a href="{{ url('/user') }}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+						<div class="menu-hd MyShangcheng"><a href="{{ url('/user/center') }}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 
 					</div>
 					<div class="topMessage mini-cart">
 						
 					</div>
-					<div class="topMessage favorite">
-						<div class="menu-hd"><a href="/h/#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
+					
+						
 				</ul>
 				</div>
 
@@ -109,10 +109,10 @@
 					   <div class="nav-cont">
 							<ul>
 								<li class="index"><a href="{{ url('/') }}">首页</a></li>
-                                <li class="qc"><a href="/h/#">二手手机</a></li>
-                                <li class="qc"><a href="/h/#">二手汽车</a></li>
-                                <li class="qc"><a href="/h/#">二手飞机</a></li>
-                                <li class="qc last"><a href="/h/#">二手火箭</a></li>
+                                <li class="qc"><a href="/search/5">二手手机</a></li>
+                                <li class="qc"><a href="/search/5">二手火箭</a></li>
+                                <li class="qc"><a href="/home/goods/create">发布闲置</a></li>
+                                <li class="qc last"><a href="/pay/sell">我的闲置</a></li>
 							</ul>
 
 	
@@ -215,7 +215,7 @@
 
 							<ul>
 								<div class="">
-									<a href="person/index.html">
+									<a href="/home/goods/create">
 										<img src="h/images/fabuxianzhi.jpg">
 									</a>
 								</div>
@@ -237,10 +237,13 @@
 									@endif
 									<div class="clear"></div>	
 								</div>																	    
-								<span class="marqueen-title">公告</span>
-								  
-								<li><a target="_blank" href="#">洋河年末大促，低至两件五折</a></li>
-								<li><a target="_blank" href="#">洋河年末大促，低至两件五折</a></li>
+								<span class="marqueen-title"><a target="_blank" href="/notice">公告</a></span>
+
+								@foreach($notice as $k=>$v)
+								
+								<li><a target="_blank" href="/notice/{{$v['id']}}">{{ $v['title'] }}</a></li>
+								
+								@endforeach
 								
 								
 							</ul>
@@ -271,43 +274,17 @@
 
 					<!--广告位 -->
 			<div class="am-g am-g-fixed recommendation">
-						
+					@foreach($ad as $k=>$v)	
 						<div class="am-u-sm-4 am-u-lg-3 ">
 							<div class="info ">
-								<h3>真的有鱼</h3>
-								<h4>开年福利篇</h4>
+								<h3>{{$v['name']}}</h3>
+								<h4>{{$v['content']}}</h4>
 							</div>
 							<div class="recommendationMain one">
-								<a href="introduction.html"><img src="/h/images/tj.png "></a>
+								<a href="http://{{$v['url']}}" target="_blank"><img src="{{$v['pic']}}"></a>
 							</div>
 						</div>	
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>真的有鱼</h3>
-								<h4>开年福利篇</h4>
-							</div>
-							<div class="recommendationMain one">
-								<a href="introduction.html"><img src="/h/images/tj.png "></a>
-							</div>
-						</div>						
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>囤货过冬</h3>
-								<h4>让爱早回家</h4>
-							</div>
-							<div class="recommendationMain two">
-								<img src="/h/images/tj1.png ">
-							</div>
-						</div>
-						<div class="am-u-sm-4 am-u-lg-3 ">
-							<div class="info ">
-								<h3>浪漫情人节</h3>
-								<h4>甜甜蜜蜜</h4>
-							</div>
-							<div class="recommendationMain three">
-								<img src="/h/images/tj2.png ">
-							</div>
-						</div>
+					@endforeach
 
 					</div>
 					
@@ -498,6 +475,17 @@
 						<a href="/h/# ">支付宝</a>
 						<b>|</b>
 						<a href="/h/# ">物流</a>
+					</p>
+				</div>
+				<div class="footer-bd ">
+					<p>
+					友情链接:
+					@foreach($link as $k=>$v)
+						@if($v['status']==0)
+						<a href="http://{{$v['url']}}">{{$v['title']}}</a>
+						<b>|</b>
+						@endif
+					@endforeach	
 					</p>
 				</div>
 				<div class="footer-bd ">

@@ -33,4 +33,26 @@ class sad_home_user extends Model
         return $this->hasOne('App\Models\sad_userinfo','uid','id');
 
     }
+
+
+    /**
+     * 对鱼塘问题板块列表一对多
+     * 此表为主表
+     */
+
+
+    public function tiwen()
+    {
+        return $this->hasMany('App\Models\sad_question','uid','id');
+    }
+
+
+    /**
+     * 对鱼塘回答板块列表 一对多
+     * 主表
+     */
+    public function huifu()
+    {
+        return $this->hasMany('App\Models\sad_answer','uid','id');
+    }
 }

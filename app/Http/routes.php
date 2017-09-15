@@ -18,7 +18,14 @@
 
 //刘红英 19~119行 111
 
+//创建控制器
+Route::resource('/address','Home\AddressController');
+// 默认地址更改
+Route::post('/address/change','Home\AddressController@change');
 
+Route::controller('address','Home\AddressController', [
+		'getDel' => 'address.del',
+	]);
 
 
 
@@ -138,6 +145,9 @@ Route::group(['middleware'=>'Login'],function(){
 	Route::get('/admin/question/delete/{id}','Admin\QuestionController@delete');
 	//网站公告管理
 	Route::resource('admin/notice','Admin\NoticeController');
+	//网站广告管理
+	Route::resource('admin/ad','Admin\AdController');
+	Route::post('admin/ad/upload','Admin\AdController@upload');
 
 });
 
@@ -147,12 +157,8 @@ Route::group(['middleware'=>'Login'],function(){
 	Route::post('admin/login','Admin\LoginController@dologin');
 	//验证码的路由
 	Route::get('/code','Code\CodeController@index');
-	//引入个人中心页面
-	Route::controller('/user','Home\UserController');
-	//支付页面的引入
-	Route::controller('/pay','Home\PayController');
-	//用户中心的安全设置页面
-	Route::controller('safety','Home\SafetyController');
+	
+	
 
 
 
@@ -257,22 +263,33 @@ Route::resource('/home/order','Home\OrderController');
 // 错误 
 Route::get('error','ErrorController@index');
 
+// 前台公告路由
+Route::get('/notice','Home\NoticeController@index');
+Route::get('/notice/{id}','Home\NoticeController@show');
+
+//前台订单管理的路由
+Route::controller('/order','Home\OrderController');
+
+// 前台跳转鱼塘页面
+Route::controller('/home/fishpond','Home\FishpondController');
+
+
+//前台引入个人中心页面
+Route::controller('/user','Home\UserController');
+//前台支付页面的引入
+Route::controller('/pay','Home\PayController');
+
+//用户中心的安全设置页面
+Route::controller('safety','Home\SafetyController');
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+// 前台商品评论
+Route::resource('/home/comment','Home\CommentController');
+// 前台用户收藏
+Route::resource('/home/collection','Home\CollectionController');
 
 
 

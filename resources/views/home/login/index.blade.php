@@ -16,15 +16,15 @@
   <body>
     <div class="login-boxtitle">
       <a href="home.html">
-        <img alt="logo" src="/h/images/logobig.png" /></a>
+        <img alt="" src="" /></a>
     </div>
     <div class="login-banner">
       <div class="login-main">
         <div class="login-banner-bg">
           <span></span>
-          <img src="/h/images/big.jpg" /></div>
+          <img src="/h/images/login_big.png" /></div>
         <div class="login-box">
-          <h3 class="title">登录商城</h3>
+          <h3 class="title">登录翻面</h3>
           <div class="clear"></div>
           <div class="login-form">
             @if (count($errors) > 0)

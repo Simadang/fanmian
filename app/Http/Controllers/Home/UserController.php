@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\sad_home_user;
 use App\Models\sad_userinfo;
+use App\Models\sad_collection;
+use App\Models\sad_goods;
 
 use DB;
 use Illuminate\Support\Facades\Validator;
@@ -22,8 +24,6 @@ class UserController extends Controller
      */
     public function getIndex()
     {
-        
-
 
         return view('home.layout.left');
     }
@@ -121,7 +121,15 @@ class UserController extends Controller
     */
      public function getCenter()
      {
-        return view('home.user.center');
+        
+    
+        // 收藏
+        $collection = sad_collection::all();
+        
+        // 收藏
+        $goods = sad_goods::all();
+
+        return view('home.user.center',compact('collection','goods'));
      }
      /*
      *
@@ -161,5 +169,59 @@ class UserController extends Controller
     {
         return view('home.user.order');
     }
+
+      /*
+    *
+    *我的闲置页面
+    *
+    */
+     public function getSell()
+     {
+        
+        //获取登录用户的信息
+        $user = session('user');
+        // dd($user);
+        //通过用户的id 获取该用户发布的信息
+        $goods = DB::table('goods')->where('uid',$user['id'])->get();
+         //通过订单的id ,获取订单中的商品的信息
+            
+        // dd($goods);
+           
+            //查询该用户的订单以及订单中商品所有的数据
+             $arr = DB::table('order') ->join('goods','order.gid','=','goods.id') ->get();
+        // dd($arr);
+
+
+        //通过订单的状态来分配订单的具体位置
+       // 未发货status=0
+       // 待付款status=1
+       // 待收货status=2
+       // 待评价status=3
+       
+        $daifukuan = DB::table('order')->where('uid',$user['id'])->where('status','0')->get();
+       // dd($daifukuan);
+        $weifahuo = DB::table('order')->where('uid',$user['id'])->where('status','1')->get();
+       
+        $yifahuo = DB::table('order')->where('uid',$user['id'])->where('status','2')->get();
+        $daipingjia = DB::table('order')->where('uid',$user['id'])->where('status','3')->get();
+
+      
+            $goods1 = DB::table('goods')->where('id',$daifukuan[0]['gid'])->get();
+          
+            $goods2 = DB::table('goods')->where('id',$weifahuo[0]['gid'])->get();
+        
+            $goods3 = DB::table('goods')->where('id',$yifahuo[0]['gid'])->get();
+       
+            $goods4 = DB::table('goods')->where('id',$daipingjia[0]['gid'])->get();
+        
+
+       
+
+        // dd($goods);
+        return view('home.order.index',compact('arr','daifukuan','goods1','weifahuo','goods2','goods3','yifahuo','goods4','daipingjia'));
+        
+
+        return view('home.pay.sell',compact('collection','goods'));
+     }
    
 }

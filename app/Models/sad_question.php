@@ -22,4 +22,13 @@ class sad_question extends Model
         return $this->hasMany('App\Models\sad_answer','qid','id');
     }
 
+    /**
+     * 对用户板块列表 一对多
+     * 副表
+     */
+    public function tiwen()
+    {
+        return $this->belongsTo('App\Models\sad_home_user','uid','id');
+    }
+
 }

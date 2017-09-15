@@ -87,8 +87,8 @@
                             </span> -->
 
                             <span class="btn-group">
-                                 <a href="" class="btn btn-small"><i class="icon-screenshot"   title="跳转到前台商品页"></i></a>
-                                 <a href="/admin/link/{{$v->id}}/edit" class="btn btn-small"   title="下架"><i class="icon-hand-down"></i></a>
+                                 <a href="/home/goods/{{$v->id}}" class="btn btn-small"><i class="icon-screenshot"   title="跳转到前台商品页"></i></a>
+                                 <a href="/admin/goods/{{$v->id}}/edit" class="btn btn-small"   title="下架"><i class="icon-hand-down"></i></a>
                                 <a href="javascript:void(0)" class="btn btn-small" onclick="delgoods({{ $v['id'] }})" title="删除"><i class="icon-trash"></i></a>
                                 
                             </span>

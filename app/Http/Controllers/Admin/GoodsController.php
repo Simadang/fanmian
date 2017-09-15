@@ -117,7 +117,7 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd($id);
     }
 
     /**
